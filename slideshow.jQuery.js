@@ -24,21 +24,25 @@
                 }
             };
         
-        $(document).keydown(function (event) {
-            switch(event.keyCode) {
-                case 37: // left arrow
-                // case 38: // up arrow
-                    mv(-1);
-                    event.preventDefault();
-                    break;
-                case 39: // right arrow
-                // case 40: // down arrow
-                    mv(1);
-                    event.preventDefault();
-                    break;
+        $(document).
+            click(function (event) {
+                mv((event.pageX > Math.floor(document.width / 2)) ? 1 : -1);
+            }).
+            keydown(function (event) {
+                switch(event.keyCode) {
+                    case 37: // left arrow
+                    // case 38: // up arrow
+                        mv(-1);
+                        event.preventDefault();
+                        break;
+                    case 39: // right arrow
+                    // case 40: // down arrow
+                        mv(1);
+                        event.preventDefault();
+                        break;
                 
-            }
-        });
+                }
+            });
         
         mv();
         return this;
