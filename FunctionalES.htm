@@ -1,0 +1,88 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>jQuery Plugins Presentation</title>
+    <link rel="stylesheet" href="slideshow.css" />
+
+<body>
+<span id="ssmd">
+= Functional Javascript
+== Wat?!
+_
+=== Outline
+# Programming Paradigms
+# Blow peoples' minds
+#* Javascript is multi-paradigm
+#*# Imperative
+#*# Object Oriented
+#*# Functional
+# Focus on Functional
+#* Wikipedia
+#* Concepts of Functional
+# Write functional Javascript
+# fin.
+
+_
+=== Programming Paradigms
+* Functional
+* Imperative (Proceedural, Structured)
+* Object Oriented
+* Others - yes there are lots.
+_
+= Javascript is multi-paradigm
+== What? Blaspheme! That's not possible!
+_
+=== What is Functional?
+"In computer science, functional programming is a programming paradigm that treats computation as the evaluation of mathematical functions and avoids state and mutable data. It emphasizes the application of functions, in contrast to the imperative programming style, which emphasizes changes in state. Functional programming has its roots in lambda calculus, a formal system developed in the 1930s to investigate function definition, function application, and recursion. Many functional programming languages can be viewed as elaborations on the lambda calculus." ~~ [wikipedia](0)
+_
+= That's Boring!
+== Much like the design of this presentation...
+_
+=== What does functional mean?
+* purity (referentially transparent)
+* higer order functions
+* functions as values
+* curry-ing/partial application
+* lazy evaluation
+* continuations
+* closures
+* lexical scoping
+* composition
+_
+=== Purity
+Simple! For a value x there is a value y returned.
+
+_
+"Programming in a functional style can also be accomplished in languages that aren't specifically designed for functional programming." ~~ [wikipedia](0)
+
+We can gain some of the benefits that Functional teaches us by just working in that way - don't rely on side affects.
+_
+=== What does it mean?
+* treats computation as the evaluation of mathematical functions
+* avoids state and mutable data
+_
+= #Functional
+== with Javascript
+_
+=== Resources
+# http://en.wikipedia.org/wiki/Functional_programming
+# http://www.defmacro.org/ramblings/fp.html
+# http://cjohansen.no/talks/2012/sdc-functional/#1
+_
+= Joshua T Kalis
+== August 2012
+</span>
+<div id="slideshow"></div>
+
+use left-arrow and right-arrow to navigate, or click/tap on left/right of window
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="hashchange.js"></script>
+    <script src="ssmd.js"></script>
+    <script src="slideshow.jquery.js"></script>
+    <script>
+    $(function ($) {
+        $("div#slideshow").slideshow(ssmd($("span").html()).join(""));
+    });
+    </script>

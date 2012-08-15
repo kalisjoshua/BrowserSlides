@@ -1,68 +1,78 @@
 body {
     font-size: 130%;
-    margin: 0px;
+    margin: 0;
     position: relative;
-    padding: 0px;
+    padding: 0;
     text-align: center;
     }
 html {
     background: darkGrey;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     }
-span#ssmd {
+body > span {
     display: none;
     }
 
-div#slideshow {
+body > div {
     background: white;
     height: 30em;
-    margin: 0em auto;
+    margin: 0 auto;
     overflow: hidden;
     position: relative;
     text-align: left;
     width: 40em;
     }
-    div#slideshow div.slide {
-        height: 100%;
-        left: 100%;
-        position: absolute;
-        top: 0px;
-        width: 100%;
+h1,
+h2 {
+    position: relative;
+    text-align: center;
+    top: 30%;
+    }
+h3 {
+    padding: 1em 2em 0;
+    }
+.slide {
+    height: 100%;
+    left: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    }
+    .slide blockquote {
+        background: orchid;
+        display: inline-block;
+        font-style: italic;
+        margin: 0;
+        padding: 0;
         }
-        div#slideshow div.slide h1,
-        div#slideshow div.slide h2 {
-            position: relative;
-            text-align: center;
-            top: 30%;
+    .slide ol,
+    .slide ul {
+        margin-left: 5em;
+        padding: 0;
+        }
+        .slide ol ol,
+        .slide ol ul,
+        .slide ul ol,
+        .slide ul ul {
+            margin-left: 1em;
             }
-        div#slideshow div.slide h3 {
-            padding: 1em 2em 0px;
-            }
-        div#slideshow div.slide pre {
-            background: lightGrey;
-            color: black;
-            padding: 1em 1em 1em 4em;
-            position: relative;
-            }
-            div#slideshow div.slide pre code {
-                display: block;
-                }
-        div#slideshow div.slide ol,
-        div#slideshow div.slide ul {
-            margin-left: 5em;
-            padding: 0px;
-            }
-            div#slideshow div.slide ol ol,
-            div#slideshow div.slide ol ul,
-            div#slideshow div.slide ul ol,
-            div#slideshow div.slide ul ul {
-                margin-left: 1em;
-                }
-        div#slideshow div.slide span.footer {
-            bottom: 1em;
+    .slide p {
+        padding: 1em 2em;
+        }
+    .slide pre {
+        background: lightGrey;
+        color: black;
+        padding: 1em 1em 1em 4em;
+        position: relative;
+        }
+        .slide pre code {
             display: block;
-            font-size: 80%;
-            right: 1em;
-            position: absolute;
             }
+    .slide .footer {
+        bottom: 1em;
+        display: block;
+        font-size: 80%;
+        right: 1em;
+        position: absolute;
+        }

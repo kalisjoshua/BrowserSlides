@@ -1,60 +1,73 @@
 
 (function () {
+    "use strict";
+
     var lists = {
             "#": "o",
             "*": "u"
-        },
-        markup = function (i, t, src) {
-            src = src.
-                    // replace(/^\s+|\s+$|\n{2,}/g, "").
-                    replace(/^(=+)\s+(.*)/gm, function (match, p1, p2) {
-                        return "<h" + p1.length + ">" + p2 + "</h" + p1.length + ">\n";
-                    }).
-                    replace(/(^-{2,})\n+([^\1]+?)\1/m, function (match, p1, p2) {
-                        return "<pre><code>" + p2.split("\n").join("<br />") + "</code></pre>\n";
-                    }).
-                    replace(/^([^\*#<$\n]+)/gm, function (match, p1) {
-                        return p1.length > 1 ? "<p>" + p1 + "</p>\n": match;
-                    }).
-                    split("\n");
+        };
+
+    function markup (i, t, src) {
+        src = src
+            .replace(/^(=+)\s+(.*)/gm, function (match, p1, p2) {
+                return tagify("h" + p1.length, p2);
+            })
+            .replace(/(^-{2,})\n+([^\1]+?)\1/m, function (match, p1, p2) {
+                return tagify("pre", tagify("code", p2.split("\n").join("<br />")));
+            })
+            .replace(/^([^\*#<$\n]+)/gm, function (match, p1) {
+                return p1.length <= 1
+                    ? match
+                    : (/['"]/).test(p1[0])
+                        ? tagify("blockquote", tagify("p", p1))
+                        : tagify("p", p1);
+            })
+            .split("\n");
+        
+        // all that's left to process are the lists...
+        var
+            current  = ""
+          , ind      = 0
+          , previous = "";
             
-            // all that's left to process are the lists...        
-            var current = "",
-                ind = 0,
-                previous = "";
-                
-            while (ind < src.length) {
-                if (current = src[ind].match(/^[#\*]+/)) {
-                    current = current[0];
-                    src[ind] = src[ind].replace(/^[#\*]+\s+/, "<li>");
-                    if (current.length > previous.length) {
-                        src = src.slice(0, ind).concat("<" + lists[current.slice(-1)]+ "l>", src.slice(ind));
-                        ind++;
-                    }
-                    
-                    if (current.length < previous.length) {
-                        src = src.slice(0, ind).concat("</" + lists[previous.slice(-1)]+ "l>", src.slice(ind));
-                        ind++;
-                    }
-                    
-                    if (!/^[#\*]/.test(src[ind + 1])) {
-                        current = current.split("");
-                        
-                        while (current.length) {
-                            src = src.slice(0, ind + 1).concat("</" + lists[current.pop()]+ "l>", src.slice(ind + 1));
-                            ind++;
-                        }
-                    } else {
-                        previous = current;
-                    }
+        while (ind < src.length) {
+            if (current = src[ind].match(/^[#\*]+/)) {
+                current = current[0];
+                src[ind] = src[ind].replace(/^[#\*]+\s+/, "<li>");
+                if (current.length > previous.length) {
+                    src = src.slice(0, ind).concat("<" + lists[current.slice(-1)]+ "l>", src.slice(ind));
+                    ind++;
                 }
                 
-                ind++;
+                if (current.length < previous.length) {
+                    src = src.slice(0, ind).concat("</" + lists[previous.slice(-1)]+ "l>", src.slice(ind));
+                    ind++;
+                }
+                
+                if (!/^[#\*]/.test(src[ind + 1])) {
+                    current = current.split("");
+                    
+                    while (current.length) {
+                        src = src.slice(0, ind + 1).concat("</" + lists[current.pop()]+ "l>", src.slice(ind + 1));
+                        ind++;
+                    }
+                } else {
+                    previous = current;
+                }
             }
             
-            return "<div class=\"slide\" id=\"slide-" + i + "\">" + 
-                src.join("") + "<span class=\"footer\">" + i + " of " + t + "</span>" + "</div>\n\n";
-        };
+            ind++;
+        }
+        
+        return "<div class=\"slide\" id=\"slide-" + i + "\">" +
+            src.join("") + "<span class=\"footer\">" + i + " of " + t + "</span>" + "</div>\n\n";
+    }
+
+    function tagify (tag, content) {
+        return "<%1>%2</%1>\n"
+            .replace(/%1/g, tag)
+            .replace(/%2/, content);
+    }
     
     window.ssmd = function (src) {
         src = src.split("\n_\n");
