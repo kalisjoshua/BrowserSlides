@@ -15,6 +15,22 @@
             return ~~window.location.hash.slice(1) || 0;
         }
 
+        function nav (event) {
+            if ((/(?:click|keydown)/i).test(event.type)) {
+                vector = event.keyCode
+                    ? event.keyCode - 38
+                    : (event.pageX > Math.floor(document.width / 2))
+                        ? 1
+                        : -1;
+                var next = hashvalue() + vector;
+
+                if (next >= 0 && next < slideCount - 1) {
+                    event.preventDefault();
+                    window.location.hash = next;
+                }
+            }
+        }
+
         $(window).hashchange(function () {
             var hash = hashvalue();
             slides
@@ -27,20 +43,19 @@
         });
         
         $(document)
-            // .click(function (event) {
-            //     mv({keyCode: (event.pageX > Math.floor(document.width / 2)) ? 39 : 37});
-            // })
-            .keydown(function (event) {
-                vector = event.keyCode - 38;
-                var next = hashvalue() + vector;
-
-                if ((/(?:37|39)/).test(event.keyCode) && next >= 0 && next < slideCount - 1) {
-                    event.preventDefault();
-                    window.location.hash = next;
-                }
-            });
+            .click(nav)
+            .keydown(nav);
         
-        (function (i) {(i < 0 || i > slideCount) ? (window.location.hash = 0) : $(window).hashchange();}(hashvalue()));
+        // initialize the window with the slides where they need to be
+        (function (i) {
+            (i < 0 || i > slideCount)
+                ? (window.location.hash = 0)
+                : $(window).hashchange();
+
+            slides
+                .slice(0, hashvalue())
+                .css("left", "-100%");
+        }(hashvalue()));
 
         return this;
     };
