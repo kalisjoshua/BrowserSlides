@@ -2,37 +2,39 @@
 /*globals jQuery*/
 (function ($) {
     "use strict";
+            
+    var slideCount, vector;
+
+    function hashvalue () {
+        return ~~window.location.hash.slice(1) || 0;
+    }
+
+    function nav (event) {
+        if ((/(?:click|keydown)/i).test(event.type)) {
+            vector = event.keyCode
+                ? event.keyCode - 38
+                : (event.pageX > Math.floor(document.width / 2))
+                    ? 1
+                    : -1;
+            var next = hashvalue() + vector;
+
+            if (next >= 0 && next < slideCount - 1) {
+                event.preventDefault();
+                window.location.hash = next;
+            }
+        }
+    }
 
     $.fn.slideshow = function (slides) {
         slides = this
             .html(slides)
             .find("div");
-            
-        var slideCount = slides.length
-            ,vector;
 
-        function hashvalue () {
-            return ~~window.location.hash.slice(1) || 0;
-        }
-
-        function nav (event) {
-            if ((/(?:click|keydown)/i).test(event.type)) {
-                vector = event.keyCode
-                    ? event.keyCode - 38
-                    : (event.pageX > Math.floor(document.width / 2))
-                        ? 1
-                        : -1;
-                var next = hashvalue() + vector;
-
-                if (next >= 0 && next < slideCount - 1) {
-                    event.preventDefault();
-                    window.location.hash = next;
-                }
-            }
-        }
+        slideCount = slides.length;
 
         $(window).hashchange(function () {
             var hash = hashvalue();
+            
             slides
                 .stop(true, true)
                 .eq(hash - vector)
@@ -41,7 +43,7 @@
                 .eq(hash)
                 .animate({"left": 0});
         });
-        
+    
         $(document)
             .click(nav)
             .keydown(nav);
@@ -53,7 +55,7 @@
                 : $(window).hashchange();
 
             slides
-                .slice(0, hashvalue())
+                .slice(0, i)
                 .css("left", "-100%");
         }(hashvalue()));
 
