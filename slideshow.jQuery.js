@@ -50,7 +50,7 @@
         
         // initialize the window with the slides where they need to be
         (function (i) {
-            (i < 0 || i > slideCount)
+            (!i || i < 0 || i > slideCount)
                 ? (window.location.hash = 0)
                 : $(window).hashchange();
 

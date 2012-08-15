@@ -46,6 +46,13 @@ h3 {
         margin: 0;
         padding: 0;
         }
+        .slide blockquote footer {
+            left: 0;
+            padding: 0 2em;
+            position: relative;
+            text-align: right;
+            top: -1em;
+        }
     .slide ol,
     .slide ul {
         margin-left: 5em;
@@ -61,8 +68,8 @@ h3 {
         padding: 1em 2em;
         }
     .slide pre {
-        background: lightGrey;
-        color: black;
+        background: #333;
+        color: #FFFFFF;
         padding: 1em 1em 1em 4em;
         position: relative;
         }

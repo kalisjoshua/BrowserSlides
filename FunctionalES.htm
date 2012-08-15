@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>jQuery Plugins Presentation</title>
+    <title></title>
     <link rel="stylesheet" href="slideshow.css" />
 
 <body>
@@ -33,8 +33,39 @@ _
 = Javascript is multi-paradigm
 == What? Blaspheme! That's not possible!
 _
+=== Imperative Javascript
+---
+var message = "Hello ";
+var name = prompt("What is your name?");
+alert(message + name);
+---
+# First we set a variable with the string "Hello".
+# Then we ask the user for their name using the prompt.
+# Finally we greet them with a message including their name.
+Do we see the "Proceedure" here?
+_
+=== Object Oriented
+---
+function Greeting (name) {
+    this.name = name;
+}
+Greeting.promptMessage = "What is your name?";
+Greeting.prototype.say = function (message) {
+    alert(message + this.name);
+}
+var user = new Greeting(prompt(Greeting.promptMessage));
+user.say("Hello ");
+---
+# Define a "class"; see the quotes, because Javascript doesn't truly have classes.
+#* Added a "static" property; that is publically available
+#* Added a type-based method; prototypically inherited by all instances
+# Create an instance of the "class" with an instance variable of the user's name.
+# Greet the user with a message including their name.
+
+Here we gain some reusability, albeit with some verbosity.
+_
 === What is Functional?
-"In computer science, functional programming is a programming paradigm that treats computation as the evaluation of mathematical functions and avoids state and mutable data. It emphasizes the application of functions, in contrast to the imperative programming style, which emphasizes changes in state. Functional programming has its roots in lambda calculus, a formal system developed in the 1930s to investigate function definition, function application, and recursion. Many functional programming languages can be viewed as elaborations on the lambda calculus." ~~ [wikipedia](0)
+    "In computer science, functional programming is a programming paradigm that treats computation as the evaluation of mathematical functions and avoids state and mutable data. It emphasizes the application of functions, in contrast to the imperative programming style, which emphasizes changes in state. Functional programming has its roots in lambda calculus, a formal system developed in the 1930s to investigate function definition, function application, and recursion. Many functional programming languages can be viewed as elaborations on the lambda calculus." ~~ [wikipedia(1)](http://en.wikipedia.org/wiki/Functional_programming)
 _
 = That's Boring!
 == Much like the design of this presentation...
@@ -54,7 +85,7 @@ _
 Simple! For a value x there is a value y returned.
 
 _
-"Programming in a functional style can also be accomplished in languages that aren't specifically designed for functional programming." ~~ [wikipedia](0)
+    "Programming in a functional style can also be accomplished in languages that aren't specifically designed for functional programming." ~~ [wikipedia(1)](http://en.wikipedia.org/wiki/Functional_programming)
 
 We can gain some of the benefits that Functional teaches us by just working in that way - don't rely on side affects.
 _

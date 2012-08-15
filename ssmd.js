@@ -9,19 +9,20 @@
 
     function markup (i, t, src) {
         src = src
+            // title (h1-6) tags
             .replace(/^(=+)\s+(.*)/gm, function (match, p1, p2) {
                 return tagify("h" + p1.length, p2);
             })
+            // code blocks
             .replace(/(^-{2,})\n+([^\1]+?)\1/m, function (match, p1, p2) {
                 return tagify("pre", tagify("code", p2.split("\n").join("<br />")));
             })
-            .replace(/^([^\*#<$\n]+)/gm, function (match, p1) {
-                return p1.length <= 1
-                    ? match
-                    : (/['"]/).test(p1[0])
-                        ? tagify("blockquote", tagify("p", p1))
-                        : tagify("p", p1);
+            // blockquote
+            .replace(/^\s{4}((['"]).*\1)\s*~~\s*\[([^\]]+)\]\(([^\(]+)\).*$/m, function (match, quote, garbage, link, href) {
+                return tagify("blockquote", tagify("p", quote) + tagify("footer", tagify("a", link, " href=\"%1\"".replace(/%1/, href))));
             })
+            // paragraphs
+            .replace(/^([^\*#<$\n]+)/gm, tagify("p", "$1"))
             .split("\n");
         
         // all that's left to process are the lists...
@@ -63,10 +64,11 @@
             src.join("") + "<span class=\"footer\">" + i + " of " + t + "</span>" + "</div>\n\n";
     }
 
-    function tagify (tag, content) {
-        return "<%1>%2</%1>\n"
+    function tagify (tag, content, attr) {
+        return "<%1%3>%2</%1>\n"
+            .replace(/%3/, attr || "")
             .replace(/%1/g, tag)
-            .replace(/%2/, content);
+            .replace(/%2/, content.replace(/^\s*|\s*$/g, ""));
     }
     
     window.ssmd = function (src) {
