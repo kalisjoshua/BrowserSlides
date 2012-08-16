@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <link href='//fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'/>
     <link rel="stylesheet" href="slideshow.css" />
 
 <body>
@@ -10,6 +11,15 @@
 = Functional Javascript
 == Wat?!
 _
+
+
+=== About me - Joshua Kalis
+Front-end engineer for @QuickenLoans and I love Javascript!
+* http://joshuakalis.com
+* @kalisjoshua
+_
+
+
 === Outline
 # Programming Paradigms
 # Blow peoples' minds
@@ -22,28 +32,36 @@ _
 #* Concepts of Functional
 # Write functional Javascript
 # fin.
-
 _
+
+
 === Programming Paradigms
 * Functional
 * Imperative (Proceedural, Structured)
 * Object Oriented
 * Others - yes there are lots.
 _
+
+
 = Javascript is multi-paradigm
 == What? Blaspheme! That's not possible!
 _
-=== Imperative Javascript
+
+
+=== Imperative
 ---
 var message = "Hello ";
-var name = prompt("What is your name?");
+var promptMessage = "What is your name?";
+var name = prompt(promptMessage);
 alert(message + name);
 ---
-# First we set a variable with the string "Hello".
-# Then we ask the user for their name using the prompt.
+# Set some variables
+# Ask the user for their name and store that to a variable
 # Finally we greet them with a message including their name.
 Do we see the "Proceedure" here?
 _
+
+
 === Object Oriented
 ---
 function Greeting (name) {
@@ -56,20 +74,30 @@ Greeting.prototype.say = function (message) {
 var user = new Greeting(prompt(Greeting.promptMessage));
 user.say("Hello ");
 ---
+Here we gain some reusability, albeit with some verbosity.
 # Define a "class"; see the quotes, because Javascript doesn't truly have classes.
 #* Added a "static" property; that is publically available
 #* Added a type-based method; prototypically inherited by all instances
 # Create an instance of the "class" with an instance variable of the user's name.
 # Greet the user with a message including their name.
-
-Here we gain some reusability, albeit with some verbosity.
 _
+
+
+= SO?!
+== None of that really lends itself to functional.
+_
+
+
 === What is Functional?
     "In computer science, functional programming is a programming paradigm that treats computation as the evaluation of mathematical functions and avoids state and mutable data. It emphasizes the application of functions, in contrast to the imperative programming style, which emphasizes changes in state. Functional programming has its roots in lambda calculus, a formal system developed in the 1930s to investigate function definition, function application, and recursion. Many functional programming languages can be viewed as elaborations on the lambda calculus." ~~ [wikipedia(1)](http://en.wikipedia.org/wiki/Functional_programming)
 _
+
+
 = That's Boring!
 == Much like the design of this presentation...
 _
+
+
 === What does functional mean?
 * purity (referentially transparent)
 * higer order functions
@@ -81,34 +109,46 @@ _
 * lexical scoping
 * composition
 _
+
+
 === Purity
 Simple! For a value x there is a value y returned.
 
 _
+
+
     "Programming in a functional style can also be accomplished in languages that aren't specifically designed for functional programming." ~~ [wikipedia(1)](http://en.wikipedia.org/wiki/Functional_programming)
 
 We can gain some of the benefits that Functional teaches us by just working in that way - don't rely on side affects.
 _
+
+
 === What does it mean?
 * treats computation as the evaluation of mathematical functions
 * avoids state and mutable data
 _
+
+
 = #FunctionalJS
-== with Javascript
+== Go forth and be productive
 _
+
+
 === Resources
 # http://en.wikipedia.org/wiki/Functional_programming
 # http://www.defmacro.org/ramblings/fp.html
 # http://cjohansen.no/talks/2012/sdc-functional/#1
 _
+
+
 = Joshua T Kalis
 == August 2012
 </span>
 <div id="slideshow"></div>
 
-use left-arrow and right-arrow to navigate, or click/tap on left/right of window
+<p class="help">use left-arrow and right-arrow to navigate, or click/tap on left/right of window</p>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="jquery.js"></script>
     <script src="hashchange.js"></script>
     <script src="ssmd.js"></script>
     <script src="slideshow.jquery.js"></script>

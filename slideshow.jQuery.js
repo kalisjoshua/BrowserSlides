@@ -3,7 +3,9 @@
 (function ($) {
     "use strict";
             
-    var slideCount, vector;
+    var slideCount, theme, vector;
+
+    theme = $("<kbd>");
 
     function hashvalue () {
         return ~~window.location.hash.slice(1) || 0;
@@ -28,7 +30,20 @@
     $.fn.slideshow = function (slides) {
         slides = this
             .html(slides)
-            .find("div");
+            .find("div")
+            .each(function () {
+                var color = "#" + Math.random().toString(16).slice(2, 8);
+                $(this)
+                    .css("border-color", color)
+                    .find(".footer")
+                    .css({"background-color": color})
+                    .wrapInner("<span>");
+            });
+
+        theme
+            .html(([]).join.call(slides.first().children().slice(0,2).map(function (i, n) {return n.innerHTML.match(/\b\w/g);}), ""))
+            .appendTo(slides);
+
 
         slideCount = slides.length;
 
@@ -50,8 +65,8 @@
         
         // initialize the window with the slides where they need to be
         (function (i) {
-            (!i || i < 0 || i > slideCount)
-                ? (window.location.hash = 0)
+            (!window.location.hash || i < 0 || i > slideCount)
+                ? (window.location.hash = i)
                 : $(window).hashchange();
 
             slides
