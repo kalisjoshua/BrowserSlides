@@ -59,9 +59,19 @@
                 .animate({"left": 0});
         });
     
-        $(document)
-            .click(nav)
-            .keydown(nav);
+        // setup navigation for desktop and mobile
+        $(document).keydown(nav);
+
+        $("#help a")
+            .click(function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                $(this)
+                    .closest("p")
+                    .children("span")
+                    .remove();
+                $(document).click(nav);
+            });
         
         // initialize the window with the slides where they need to be
         (function (i) {

@@ -13,14 +13,8 @@
 _
 
 
-=== About me - Joshua Kalis
-Front-end engineer for @QuickenLoans and I love Javascript!
-* http://joshuakalis.com
-* @kalisjoshua
-_
-
-
 === Outline
+# Introduction
 # Programming Paradigms
 # Blow peoples' minds
 #* Javascript is multi-paradigm
@@ -33,6 +27,80 @@ _
 # Write functional Javascript
 # fin.
 _
+
+
+=== About me - Joshua Kalis
+Front-end engineer for @QuickenLoans.
+* http://joshuakalis.com
+* @kalisjoshua
+_
+
+
+=== Where did this guy come from?
+* Started as a Graphic Designer
+** NO PROGRAMMING
+* Moved to Web Design
+** Images
+** CSS
+** HTML
+* Picked up ASP Classic
+* Forced to learn Javascript (HATED all of it!)
+* Learned a little of these
+** PHP4
+** C# .NET 2.0
+** Java
+* Began to LOVE Javascript
+_
+
+
+=== About me - Joshua Kalis
+Front-end engineer for @QuickenLoans and I love Javascript!
+* http://joshuakalis.com
+* @kalisjoshua
+_
+
+
+=== What are the bad parts of Javascript?
+* Variables is free to be overwritten at any time
+* Type coersion within equality checks are unreliable
+* The "this" value can be tricky for n00bs
+* Blocks are optional for control structures
+* Switch fall-through
+* The "arguments" object inside function calls
+* Automatic semi-colon insertion
+* The difference in function statements and expressions
+* I rarely use these
+** eval
+** with
+** continue
+** Typed wrappers: new Boolean(true), new Number(9), new Array(), etc.
+** new (necessary at times but abstracted away from users)
+** void
+* Unused reserved words
+* Unicode
+* The typeof operator is in accurate
+* Floating point numbers: 0.1 + 0.2 !== 0.3
+* The plus (+) operator doing double duty as addition and concatenation
+* NaN... Nyan cat?
+_
+
+
+=== What is there to love about Javascript?
+* Ubiquitous
+** It's almost everywhere
+** Setup is done for you
+* Forgiving
+** Making mistakes might still achieve the goal you want
+** Easy to start programming
+* Useful
+** People like having interactive web pages
+** Employable skill
+* Multiparadigm
+** Write however you want
+* and more probably
+_
+
+
 <!-- 
     misc
         2 types of side effects
@@ -44,19 +112,17 @@ _
         test-ability leads to confidence in the execution
         purity/referential transparency
             caching/memoizing
+        reduced function length and complexity
+    Traditionally in OOP functions (methods) must be a part of an object
+        lamba expressions
  -->
 
 
 === Programming Paradigms
-* Functional
 * Imperative (Proceedural, Structured)
 * Object Oriented
+* Functional
 * Others - yes there are lots.
-_
-
-
-= Javascript is multi-paradigm
-== What? Blaspheme! That's not possible!
 _
 
 
@@ -92,6 +158,29 @@ Here we gain some reusability, albeit with some verbosity.
 #* Added a type-based method; prototypically inherited by all instances
 # Create an instance of the "class" with an instance variable of the user's name.
 # Greet the user with a message including their name.
+_
+
+
+=== I write a lot of non-functional Javascript
+---
+$.fn.ready(function () {
+    $(".lookingForPlugins")
+        .initializePlugin({
+            myOptions: "Sea Turtles"
+            ,noopCallback: function () {}
+        });
+});
+---
+Just to set you at ease, I am not a functional Javascript doyen writing everything in a functional manner. Actually, from time to time, I even write Javascript that doesn't even function.
+---
+function myAwesomeness (arg) {
+    // do the most awesome thing to arg
+    // fully unit tested
+    // purely functional
+}
+...
+myAwesomeness(); // derp derp
+---
 _
 
 
@@ -162,7 +251,7 @@ _
 </span>
 <div id="slideshow"></div>
 
-<p class="help">use left-arrow and right-arrow to navigate, or click/tap on left/right of window</p>
+<p id="help">Use left-arrow and right-arrow to navigate, or <span><a href="#">add mobile tap</a> to navigating</span> by clicking either side of the screen.</p>
 
     <script src="jquery.js"></script>
     <script src="hashchange.js"></script>

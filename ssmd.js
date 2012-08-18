@@ -14,7 +14,7 @@
                 return tagify("h" + p1.length, p2);
             })
             // code blocks
-            .replace(/(^-{2,})\n+([^\1]+?)\1/m, function (match, p1, p2) {
+            .replace(/(^-{2,})\n+([^\1]+?)\1/gm, function (match, p1, p2) {
                 return tagify("pre", tagify("code", p2.split("\n").join("<br />")));
             })
             // blockquote
