@@ -95,7 +95,7 @@ html {
     }
     .slide ol,
     .slide ul {
-        margin: .5em 0 0 100px;
+        margin: .5em 0 .5em 100px;
         padding: 0;
         }
         .slide li ol,
@@ -110,8 +110,9 @@ html {
         background: #333;
         color: #FFFFFF;
         font-family: 'Ubuntu Mono', sans-serif;
+        line-height: 2.2ex;
         margin: 0;
-        padding: 1em 1em 1em 80px;
+        padding: .75em 80px;
         position: relative;
         }
         .slide pre code {

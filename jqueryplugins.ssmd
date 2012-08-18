@@ -1,15 +1,3 @@
-<!DOCTYPE html>  
-
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<title>jQuery Plugins Presentation</title>
-<link rel="stylesheet" href="slideshow.css" />
-
-</head>
-
-<body>
-<span id="ssmd">
 = jQuery Plugins
 == Why, and How?
 _
@@ -318,20 +306,3 @@ _
 _
 = Joshua T Kalis
 == March 2011
-</span>
-<div id="slideshow"></div>
-
-use left-arrow and right-arrow to navigate, or click/tap on left/right of window
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-
-<script src="ssmd.js"></script>
-<script src="slideshow.jquery.js"></script>
-<script>
-$(function ($) {
-    $("div#slideshow").slideshow(ssmd($("span").html()).join(""));
-});
-</script>
-
-</body>
-</html>

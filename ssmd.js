@@ -86,6 +86,6 @@
             deck.push(markup(deck.length, total, src.shift()));
         }
         
-        return deck;
+        return deck.join("");
     };
 }());
