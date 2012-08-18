@@ -7,6 +7,6 @@ $.fn.ready(function () {
       $("div#slideshow")
         .slideshow(ssmd(data));
     }
-    ,url: window.location.hash.slice(1) + ".ssmd"
+    ,url: window.location.hash.match(/[^#\-]+/)[0] + ".ssmd"
   });
 });

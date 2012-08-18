@@ -140,7 +140,8 @@ Greeting.promptMessage = "What is your name?";
 Greeting.prototype.say = function (message) {
     alert(message + this.name);
 }
-var user = new Greeting(prompt(Greeting.promptMessage));
+var name = prompt(Greeting.promptMessage);
+var user = new Greeting(name);
 user.say("Hello ");
 ---
 Here we gain some reusability, albeit with some verbosity.
@@ -296,6 +297,30 @@ $("a#clicker")
 _
 
 
+=== IIFE - Immediately Invoked Function Expression
+Simple math: 1 + (2 + 3) + 4 = 10
+Reduces to: 1 + 5 + 4 = 10
+---
+var add = function (a, b) {return a + b;};
+var result = add(1, 2); // result is now 3
+---
+Baby steps.
+---
+var result = (add)(1, 2); // same as above
+---
+Slightly bigger step.
+---
+var result = (function (a, b) {return a + b;})(1, 2); // result is now 3
+---
+Different formatting
+---
+var result = (function (a, b) {
+    return a + b;
+})(1, 2);
+---
+_
+
+
 === Closure/lexical scoping
 * Objects retain access to the context (scope) in which they were created
 ---
@@ -304,10 +329,11 @@ var formatter = function (str) {
 }
 var myObj = (function (fn) {
     var hidden = "I have a secret."
-    return {
+    var innerObj = {
         get: function () { return fn(hidden); }
         ,set: function (newValue) { hidden = newValue; }
     };
+    return innerObj;
 }(formatter));
 
 myObj.get(); // returns "Want to know a secret? I have a secret."

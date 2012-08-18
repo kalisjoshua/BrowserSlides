@@ -3,12 +3,16 @@
 (function ($) {
     "use strict";
             
-    var slideCount, theme, vector;
+    var presentation, slideCount, theme, vector;
 
     theme = $("<kbd>");
 
-    function hashvalue () {
-        return ~~window.location.hash.slice(1) || 0;
+    function hashvalue (value) {
+        if (!value && arguments.length !== 1) {
+            return (window.location.hash.match(/\d+/) || [])[0] || 0;
+        } else {
+            window.location.hash = presentation + "-" + value;
+        }
     }
 
     function nav (event) {
@@ -18,11 +22,11 @@
                 : (event.pageX > Math.floor(document.width / 2))
                     ? 1
                     : -1;
-            var next = hashvalue() + vector;
+            var next = ~~hashvalue().match(/\d+/)[0] + vector;
 
             if (next >= 0 && next < slideCount - 1) {
                 event.preventDefault();
-                window.location.hash = next;
+                hashvalue(next);
             }
         }
     }
@@ -72,11 +76,13 @@
                     .remove();
                 $(document).click(nav);
             });
+
+        presentation = window.location.hash.match(/[^#\-]+/)[0];
         
         // initialize the window with the slides where they need to be
         (function (i) {
-            (!window.location.hash || i < 0 || i > slideCount)
-                ? (window.location.hash = i)
+            (!i || i < 0 || i > slideCount)
+                ? hashvalue(0)
                 : $(window).hashchange();
 
             slides
