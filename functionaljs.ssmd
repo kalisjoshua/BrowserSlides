@@ -3,20 +3,26 @@
 _
 
 
-=== Outline
-# Introduction
-# Programming Paradigms
-# Blow peoples' minds
-#* Javascript is multi-paradigm
-#*# Imperative
-#*# Object Oriented
-#*# Functional
-# Focus on Functional
-#* Wikipedia
-#* Concepts of Functional
-# Write functional Javascript
-# fin.
+=== What am I trying to accomplish here?
+* What are some concepts of functional programming
+* How can those concepts be achieved in Javascript
 _
+
+
+                    === Outline
+                    # Introduction
+                    # Programming Paradigms
+                    # Blow peoples' minds
+                    #* Javascript is multi-paradigm
+                    #*# Imperative
+                    #*# Object Oriented
+                    #*# Functional
+                    # Focus on Functional
+                    #* Wikipedia
+                    #* Concepts of Functional
+                    # Write functional Javascript
+                    # fin.
+                    _
 
 
 === About me - Joshua Kalis
@@ -279,6 +285,7 @@ _
 * Takes a function as an argument (or)
 * Returns a function as a result
 Examples: map, filter, forEach/each, some, every, click, focus, load, keydown, ... etc.
+==== Functions as arguments
 ---
 var a = [1,2,3,4,5];
 var double = function (x) {
@@ -297,6 +304,31 @@ $("a#clicker")
 _
 
 
+=== Higher Order Functions (cont.)
+Examples: bind, "factories", others..........
+==== Funcitons as returned values
+---
+// add factory
+function makeAdder (preValue) {
+    return function (x) {
+        return preValue + x;
+    };
+}
+var add5 = makeAdder(5);
+add5(10);   // returns 15
+add5(1000); // returns 1005
+add5(-4);   // returns 1
+---
+or...
+---
+function add (a, b) {
+    return a + b;
+}
+var add5 = add.bind(null, 5); // partial function application "topic coming soon"
+---
+_
+
+
 === IIFE - Immediately Invoked Function Expression
 Simple math: 1 + (2 + 3) + 4 = 10
 Reduces to: 1 + 5 + 4 = 10
@@ -306,7 +338,7 @@ var result = add(1, 2); // result is now 3
 ---
 Baby steps.
 ---
-var result = (add)(1, 2); // same as above
+var result = (add)(1, 2); // remember, parenthesis are for grouping
 ---
 Slightly bigger step.
 ---
@@ -336,15 +368,57 @@ var myObj = (function (fn) {
     return innerObj;
 }(formatter));
 
-myObj.get(); // returns "Want to know a secret? I have a secret."
+myObj.get();  // returns "Want to know a secret? I have a secret."
 myObj.set("Javascript is awesome!");
-myObj.get(); // returns "Want to know a secret? Javascript is awesome!"
+myObj.get();  // returns "Want to know a secret? Javascript is awesome!"
 myObj.hidden; // undefined
 ---
 _
 
 
+=== Scope Chain
+<pre>
+    program execution drills down through scopes
+              &darr;
+    +-------------------+
+    |    Global Scope   |
+    |-------------------|
+    | Namespace Context | &larr; single global namespace object (omitted)
+    |-------------------|
+    |    IIFE Context   | &larr; innerObj is assigned to myObject through return
+    |-------------------|
+    |        ...        |
+    |-------------------|
+    | Execution Context | &larr; myObj.get has priviledged access to "hidden"
+    +-------------------+
+              &uarr;
+    variable resolution looks up the scope chain until hitting global
+</pre>
+_
+
+
 === Curry-ing/partial application
+Reducing the number of arguments by applying others previously.
+---
+function add (a, b) {
+    return a + b;
+}
+var add5 = add.bind(null, 5);
+---
+The bind method of the Function object allows us to do two things:
+# Explicitly set the context (value of "this" inside the function) a function will execute with
+# Pre-determine arguments that will be passed in
+---
+// !WARNING! unsafe for actual use
+function bind (fn, context, args) {
+    return function () {
+        fn.apply(context, args.concat(arguments));
+    }
+}
+var add5 = bind(add, null, [5]);
+add5(10);   // returns 15
+add5(-4);   // returns 1
+---
 _
 
 

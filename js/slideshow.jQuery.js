@@ -24,7 +24,7 @@
                     : -1;
             var next = ~~hashvalue().match(/\d+/)[0] + vector;
 
-            if (next >= 0 && next < slideCount - 1) {
+            if (Math.abs(vector) === 1 && (next >= 0 && next < slideCount - 1)) {
                 event.preventDefault();
                 hashvalue(next);
             }

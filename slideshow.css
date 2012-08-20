@@ -118,6 +118,9 @@ html {
         .slide pre code {
             display: block;
             }
+        .slide pre p {
+            padding: 0;
+            }
     .slide .footer {
         border-bottom: 10px solid;
         bottom: 0;
