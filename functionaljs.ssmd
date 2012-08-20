@@ -10,6 +10,13 @@ _
 _
 
 
+=== Ajenda
+* Introduction
+* Functional Concepts
+* Examples
+_
+
+
 === About me - Joshua Kalis
 Front-end engineer for @QuickenLoans.
 * [JoshuaKalis.com](http://joshuakalis.com)
@@ -82,23 +89,6 @@ _
 _
 
 
-<!-- 
-    misc
-        2 types of side effects
-        the UNIX philosophy
-            do one thing
-            work together - composition
-    Why is functional programming a good thing? What benefits can be gained?
-        lazyness - write once, use over and over everwhere
-        test-ability leads to confidence in the execution
-        purity/referential transparency
-            caching/memoizing
-        reduced function length and complexity
-    Traditionally in OOP functions (methods) must be a part of an object
-        lamba expressions
- -->
-
-
 === Programming Paradigms
 * Imperative (Proceedural, Structured)
 * Object Oriented
@@ -169,6 +159,23 @@ _
 = SO?!
 == None of that really lends itself to functional.
 _
+
+
+<!-- 
+    misc
+        2 types of side effects
+        the UNIX philosophy
+            do one thing
+            work together - composition
+    Why is functional programming a good thing? What benefits can be gained?
+        lazyness - write once, use over and over everwhere
+        test-ability leads to confidence in the execution
+        purity/referential transparency
+            caching/memoizing
+        reduced function length and complexity
+    Traditionally in OOP functions (methods) must be a part of an object
+        lamba expressions
+ -->
 
 
 === What is Functional?
@@ -407,6 +414,53 @@ _
 
 
 === Composition
+A new function that, when called, will pass the output of one function call as the input of the next and so on through all functions in the composition.
+---
+function fnA (a) {
+    // ... do some stuff
+    return something;
+}
+function fnB (b) {
+    // ... do some more stuff
+    return something;
+}
+function fnC (c) {
+    // ... do some more, moar, stuff
+    return something;
+}
+var resultA = fnA("something");
+var resultB = fnB(resultA);
+var resultC = fnC(resultB);
+// or
+var result = fnC(fnB(fnA("something")));
+---
+To be cont...
+_
+
+
+=== Composition (cont.)
+---
+function fnA (a) {
+    // ... do some stuff
+    return something;
+}
+function fnB (b) {
+    // ... do some more stuff
+    return something;
+}
+function fnC (c) {
+    // ... do some more, moar, stuff
+    return something;
+}
+var compositionABC = compose(fnA, fnB, fnC);
+// ...
+var result = compositionABC("something");
+var map = ["one", "two", "three"].map(compositionABC);
+---
+* Reusable
+* Passable
+* Optimized for looping
+* ...
 _
 
 
@@ -415,8 +469,8 @@ _
 _
 
 
-=== Continuations
-http://marijnhaverbeke.nl/cps/
+=== Continuations?
+[Continuation-Passing Style?](http://marijnhaverbeke.nl/cps/)
 _
 
 
@@ -424,7 +478,7 @@ _
 
     "Programming in a functional style can also be accomplished in languages that aren't specifically designed for functional programming." ~~ [wikipedia(1)](http://en.wikipedia.org/wiki/Functional_programming)
 
-We can gain some of the benefits that Functional teaches us by just working in that way - don't rely on side affects.
+We can gain some of the benefits that Functional offers us by just working in that way - don't rely on side affects.
 _
 
 
