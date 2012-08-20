@@ -6,35 +6,21 @@ _
 === What am I trying to accomplish here?
 * What are some concepts of functional programming
 * How can those concepts be achieved in Javascript
+* Teach myself more about functional programming
 _
-
-
-                    === Outline
-                    # Introduction
-                    # Programming Paradigms
-                    # Blow peoples' minds
-                    #* Javascript is multi-paradigm
-                    #*# Imperative
-                    #*# Object Oriented
-                    #*# Functional
-                    # Focus on Functional
-                    #* Wikipedia
-                    #* Concepts of Functional
-                    # Write functional Javascript
-                    # fin.
-                    _
 
 
 === About me - Joshua Kalis
 Front-end engineer for @QuickenLoans.
-* http://joshuakalis.com
-* @kalisjoshua
+* [JoshuaKalis.com](http://joshuakalis.com)
+* [@kalisjoshua](http://twitter.com/kalisjoshua)
+* [Github.com/kalisjoshua](https://github.com/kalisjoshua)
 _
 
 
 === Where did this guy come from?
 * Started as a Graphic Designer
-** NO PROGRAMMING
+** NOT a programmer
 * Moved to Web Design
 ** Images
 ** CSS
@@ -49,10 +35,8 @@ _
 _
 
 
-=== About me - Joshua Kalis
-Front-end engineer for @QuickenLoans and I love Javascript!
-* http://joshuakalis.com
-* @kalisjoshua
+= Joshua Kalis
+== I love Javascript! So I might be biased.
 _
 
 
