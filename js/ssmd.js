@@ -17,9 +17,13 @@
             .replace(/(^-{3})\n+([^\1]+?)\1/gm, function (match, p1, p2) {
                 return tagify("pre", tagify("code", p2.split("\n").join("<br />")));
             })
+            // links
+            .replace(/\[([^\]]+)\]\(([^\(]+)\)/g, function (match, link, href) {
+                return tagify("a", link, " href=\"" + href + "\"");
+            })
             // blockquote
-            .replace(/^\s{4}((['"]).*\1)\s*~~\s*\[([^\]]+)\]\(([^\(]+)\).*$/m, function (match, quote, garbage, link, href) {
-                return tagify("blockquote", tagify("p", quote) + tagify("footer", tagify("a", link, " href=\"%1\"".replace(/%1/, href))));
+            .replace(/^\s{4}((['"]).*\1)\s*~~\s*(.*)$/m, function (match, quote, garbage, footer) {
+                return tagify("blockquote", tagify("p", quote) + tagify("footer", footer));
             })
             // paragraphs
             .replace(/^([^\*#<$\n]+)/gm, tagify("p", "$1"))
