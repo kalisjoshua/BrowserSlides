@@ -17,16 +17,16 @@
             .replace(/(^-{3})\n+([^\1]+?)\1/gm, function (match, p1, p2) {
                 return tagify("pre", tagify("code", p2.split("\n").join("<br />")));
             })
-            // links
-            .replace(/\[([^\]]+)\]\(([^\(]+)\)/g, function (match, link, href) {
-                return tagify("a", link, " href=\"" + href + "\"");
-            })
             // blockquote
             .replace(/^\s{4}((['"]).*\1)\s*~~\s*(.*)$/m, function (match, quote, garbage, footer) {
                 return tagify("blockquote", tagify("p", quote) + tagify("footer", footer));
             })
             // paragraphs
             .replace(/^([^\*#<$\n]+)/gm, tagify("p", "$1"))
+            // links
+            .replace(/\[([^\]]+)\]\(([^\(]+)\)/g, function (match, link, href) {
+                return tagify("a", link, " href=\"" + href + "\"");
+            })
             .split("\n");
         
         // all that's left to process are the lists...
@@ -63,9 +63,8 @@
             
             ind++;
         }
-        
-        return "<div class=\"slide\" id=\"slide-" + i + "\">" +
-            src.join("") + "<span class=\"footer\">" + i + " of " + t + "</span>" + "</div>\n\n";
+
+        return tagify("div", src.join("") + tagify("span", i + " of " + t, " class=\"footer\""), " class=\"slide\"");
     }
 
     function tagify (tag, content, attr) {
