@@ -1,0 +1,109 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="slideshow.css" />
+    <script src="js/jquery.js"></script>
+    <script>
+    $.fn.ready(function () {
+      function listType (leader) {
+          return {"#":"ol","*":"ul"}[leader.slice(-1)];
+      }
+
+      var s = $("body")
+        .html()
+            .replace(/^(?:([#\*]+)\s*[^$\n]+[\n\W\D])+/gm, function (list, leader) {
+                var previous = ""
+                  , stack = [];
+
+                list = (list + (list.slice(-1) === "\n" ? "" : "\n") +"*")
+                    .replace(/^([#\*]+)\s*(.*)(?=[\n\W\D]([#\*]+)\s*(.*))$/gm, function (match, leader, text, _leader, _text) {
+                        var temp = "";
+
+                        if (leader.length > previous.length) {
+                            // open a new list and list item
+                            stack.push(listType(leader));
+                            temp += "<%1>".replace("%1", listType(leader));
+                        } else if (leader.length < previous.length) {
+                            // close the previous list item and list
+                            temp += "</li></%1>".replace("%1", stack.pop());
+                        } else if (leader.length === previous.length) {
+                            // just close the previous list item
+                            temp += "</li>";
+                        }
+
+                        temp += "<li>" + text;
+
+                        // close all open lists
+                        if (!_text.length) {
+                            while (stack.length) {
+                                temp += "</li></%1>".replace("%1", stack.pop());
+                            }
+                        }
+
+                        previous = leader;
+                        return temp;
+                    });
+
+                // clean up the additional list item we added above so that we can see the end of the list
+                list = list.split("\n");
+                list.pop();
+                list = list.join("\n");
+
+                return list;
+            });
+
+      console.log(s)
+
+      $("<div>")
+        .html(s)
+        .appendTo("body")
+    });
+    </script>
+
+<body>
+=== Multi Lists
+# one
+# two
+# three
+
+==== Sub List
+# one
+# two
+# three
+_
+
+=== Numbered Lists
+I should be a paragraph.
+# hello
+# there
+# everyone
+_
+
+=== Bulleted Lists
+* hello
+* there
+* everyone
+_
+
+=== Nested Lists
+# this
+#* is
+#* a
+# complicated
+#* nested
+#*# list
+_
+
+=== Link'd Lists
+* [Google](http://google.com)
+* [jkd](jkd)
+_
+
+    "Blockquotes are special. But should span the page. &rarr;" ~~ [nothing](#)
+_
+
+= End
+== Fin
+_
