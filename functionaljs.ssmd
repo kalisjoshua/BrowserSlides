@@ -397,7 +397,7 @@ function add (a, b) {
 var add5 = add.bind(null, 5);
 ---
 The bind method of the Function object allows us to do two things:
-# Explicitly set the context (value of "this" inside the function) a function will execute with
+# Explicitly set the context a function will execute with; value of "this" inside the function
 # Pre-determine arguments that will be passed in
 ---
 // !WARNING! unsafe for actual use
@@ -416,23 +416,15 @@ _
 === Composition
 A new function that, when called, will pass the output of one function call as the input of the next and so on through all functions in the composition.
 ---
-function fnA (a) {
-    // ... do some stuff
-    return something;
-}
-function fnB (b) {
-    // ... do some more stuff
-    return something;
-}
-function fnC (c) {
-    // ... do some more, moar, stuff
-    return something;
-}
-var resultA = fnA("something");
-var resultB = fnB(resultA);
-var resultC = fnC(resultB);
+function fnA (_) { return _ + 2; }
+function fnB (_) { return _ * 3; }
+function fnC (_) { return _ - 5; }
+// ...
+var resultA = fnA(7);           // 9
+var resultB = fnB(resultA);     // 27
+var resultC = fnC(resultB);     // 22
 // or
-var result = fnC(fnB(fnA("something")));
+var result = fnC(fnB(fnA(7)));  // 22
 ---
 To be cont...
 _
@@ -440,27 +432,20 @@ _
 
 === Composition (cont.)
 ---
-function fnA (a) {
-    // ... do some stuff
-    return something;
-}
-function fnB (b) {
-    // ... do some more stuff
-    return something;
-}
-function fnC (c) {
-    // ... do some more, moar, stuff
-    return something;
-}
+function fnA (_) { return _ + 2; }
+function fnB (_) { return _ * 3; }
+function fnC (_) { return _ - 5; }
+// ...
 var compositionABC = compose(fnA, fnB, fnC);
 // ...
-var result = compositionABC("something");
-var map = ["one", "two", "three"].map(compositionABC);
+var result = compositionABC(7);             // 22
+var map = [13, 17, 23].map(compositionABC); // [40, 52, 70]
 ---
 * Reusable
 * Passable
-* Optimized for looping
-* ...
+* Optimal for [looping, maping, etc.]
+* Composable
+* Testable
 _
 
 
@@ -474,11 +459,13 @@ _
 _
 
 
-
-
     "Programming in a functional style can also be accomplished in languages that aren't specifically designed for functional programming." ~~ [wikipedia(1)](http://en.wikipedia.org/wiki/Functional_programming)
 
 We can gain some of the benefits that Functional offers us by just working in that way - don't rely on side affects.
+_
+
+
+= Example Time!
 _
 
 

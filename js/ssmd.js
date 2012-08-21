@@ -2,12 +2,20 @@
 (function () {
     "use strict";
 
-    var lists = {
-            "#": "o",
-            "*": "u"
-        };
+    // var lists = {
+    //         "#": "ol",
+    //         "*": "ul"
+    //     };
 
-    function markup (i, t, src) {
+    function listType (leader) {
+        return {"#":"ol","*":"ul"}[leader.slice(-1)];
+    }
+
+    function markup (indx, total, src) {
+        var
+            previous = ""
+          , stack = [];
+
         src = src
             // title (h1-6) tags
             .replace(/^(=+)\s+(.*)/gm, function (match, p1, p2) {
@@ -27,44 +35,64 @@
             .replace(/\[([^\]]+)\]\(([^\(]+)\)/g, function (match, link, href) {
                 return tagify("a", link, " href=\"" + href + "\"");
             })
-            .split("\n");
-        
-        // all that's left to process are the lists...
-        var
-            current  = ""
-          , ind      = 0
-          , previous = "";
-            
-        while (ind < src.length) {
-            if (current = src[ind].match(/^[#\*]+/)) {
-                current = current[0];
-                src[ind] = src[ind].replace(/^[#\*]+\s+/, "<li>");
-                if (current.length > previous.length) {
-                    src = src.slice(0, ind).concat("<" + lists[current.slice(-1)]+ "l>", src.slice(ind));
-                    ind++;
-                }
-                
-                if (current.length < previous.length) {
-                    src = src.slice(0, ind).concat("</" + lists[previous.slice(-1)]+ "l>", src.slice(ind));
-                    ind++;
-                }
-                
-                if (!/^[#\*]/.test(src[ind + 1])) {
-                    current = current.split("");
-                    
-                    while (current.length) {
-                        src = src.slice(0, ind + 1).concat("</" + lists[current.pop()]+ "l>", src.slice(ind + 1));
-                        ind++;
-                    }
-                } else {
-                    previous = current;
-                }
-            }
-            
-            ind++;
-        }
+            // lists
+            .replace(/^([#\*]+)\s*(.*)\n{2}$/gm, function (match, leader, text) {
+                var temp = "";
 
-        return tagify("div", src.join("") + tagify("span", i + " of " + t, " class=\"footer\""), " class=\"slide\"");
+                if (leader.length > previous.length) {
+                    stack.push(listType(leader));
+                    temp += "<%1>".replace("%1", listType(leader));
+                } else if (leader.length < previous.length) {
+                    temp += "</li></%1>".replace("%1", stack.pop());
+                }
+                temp += "<li>" + text;
+                console.log(arguments)
+
+                previous = leader;
+                return temp;
+            });
+
+        // close all open lists
+        while (stack.length) {
+            src += "</%1>".replace("%1", stack.pop());
+        }
+        
+        // all thats left to process are the lists...
+        // var
+        //     current  = ""
+        //   , ind      = 0
+        //   , previous = "";
+            
+        // while (ind < src.length) {
+        //     if (current = src[ind].match(/^[#\*]+/)) {
+        //         current = current[0];
+        //         src[ind] = src[ind].replace(/^[#\*]+\s+/, "<li>");
+        //         if (current.length > previous.length) {
+        //             src = src.slice(0, ind).concat("<" + lists[current.slice(-1)]+ "l>", src.slice(ind));
+        //             ind++;
+        //         }
+                
+        //         if (current.length < previous.length) {
+        //             src = src.slice(0, ind).concat("</" + lists[previous.slice(-1)]+ "l>", src.slice(ind));
+        //             ind++;
+        //         }
+                
+        //         if (!/^[#\*]/.test(src[ind + 1])) {
+        //             current = current.split("");
+                    
+        //             while (current.length) {
+        //                 src = src.slice(0, ind + 1).concat("</" + lists[current.pop()]+ "l>", src.slice(ind + 1));
+        //                 ind++;
+        //             }
+        //         } else {
+        //             previous = current;
+        //         }
+        //     }
+            
+        //     ind++;
+        // }
+
+        return tagify("div", src + tagify("span", indx + " of " + total, " class=\"footer\""), " class=\"slide\"");
     }
 
     function tagify (tag, content, attr) {
