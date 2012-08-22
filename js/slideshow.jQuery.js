@@ -24,7 +24,7 @@
                     : -1;
             var next = ~~hashvalue().match(/\d+/)[0] + vector;
 
-            if (Math.abs(vector) === 1 && (next >= 0 && next < slideCount - 1)) {
+            if (Math.abs(vector) === 1 && (next >= 0 && next < slideCount)) {
                 event.preventDefault();
                 hashvalue(next);
             }
@@ -32,7 +32,7 @@
 
         if (Math.abs(event.keyCode - 39) === 1 && (event.metaKey || event.ctrlKey)) {
             event.preventDefault();
-            hashvalue({"38": 0, "40": (slideCount - 2)}[event.keyCode]);
+            hashvalue({"38": 0, "40": (slideCount - 1)}[event.keyCode]);
         }
     }
 
