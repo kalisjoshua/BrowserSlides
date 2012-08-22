@@ -10,20 +10,22 @@
     function cleanup (slides, hashvalue) {
         var hash = hashvalue();
 
-        slides
-            .stop(true, true)
-            .slice(0, hash - vector)
-            .css("left", "-100%")
-        .end()
-            .slice(hash + 1)
-            .css("left", "100%")
-        .end()                      // display error when navigating backwards to the beginning slide
-            .eq(hash)
-            .animate({"left": 0});
+        slides.stop(true, true);
 
-        vector !== 0 && slides
-            .eq(hash - vector)
-            .animate({"left": (vector > 0 ? "-100%" : "100%")});
+        vector === 0 || vector === 2
+            ? slides
+                .css("left", "100%")
+                .slice(0, hash)
+                .css("left", "-100%")
+            .end()
+                .eq(hash)
+                .css("left", 0)
+            : slides
+                .eq(hash - vector)
+                .animate({"left": (vector > 0 ? "-100%" : "100%")})
+            .end()
+                .eq(hash)
+                .animate({"left": 0});
     }
 
     function hashvalue (value) {
