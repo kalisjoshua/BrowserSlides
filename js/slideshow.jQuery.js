@@ -7,6 +7,25 @@
 
     theme = $("<kbd>");
 
+    function cleanup (slides, hashvalue) {
+        var hash = hashvalue();
+
+        slides
+            .stop(true, true)
+            .slice(0, hash - vector)
+            .css("left", "-100%")
+        .end()
+            .slice(hash + 1)
+            .css("left", "100%")
+        .end()
+            .eq(hash)
+            .animate({"left": 0});
+
+        vector !== 0 && slides
+            .eq(hash - vector)
+            .animate({"left": (vector > 0 ? "-100%" : "100%")});
+    }
+
     function hashvalue (value) {
         if (!value && arguments.length !== 1) {
             return (window.location.hash.match(/\d+/) || [])[0] || 0;
@@ -33,6 +52,7 @@
         if (Math.abs(event.keyCode - 39) === 1 && (event.metaKey || event.ctrlKey)) {
             event.preventDefault();
             hashvalue({"38": 0, "40": (slideCount - 1)}[event.keyCode]);
+            // cleanup();
         }
     }
 
@@ -44,7 +64,7 @@
                 var color = "#" + Math.random().toString(16).slice(2, 8);
                 $(this)
                     .css("border-color", color)
-                    .find(".footer")
+                    .children("footer")
                     .css({"background-color": color})
                     .wrapInner("<span>");
             });
@@ -54,19 +74,10 @@
             .appendTo(slides);
 
 
+        cleanup = cleanup.bind(null, slides, hashvalue);
         slideCount = slides.length;
 
-        $(window).hashchange(function () {
-            var hash = hashvalue();
-            
-            slides
-                .stop(true, true)
-                .eq(hash - vector)
-                .animate({"left": (vector > 0 ? "-100%" : "100%")})
-                .end()
-                .eq(hash)
-                .animate({"left": 0});
-        });
+        $(window).hashchange(cleanup);
     
         // setup navigation for desktop and mobile
         $(document).keydown(nav);
