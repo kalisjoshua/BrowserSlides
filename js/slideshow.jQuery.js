@@ -29,6 +29,11 @@
                 hashvalue(next);
             }
         }
+
+        if (Math.abs(event.keyCode - 39) === 1 && (event.metaKey || event.ctrlKey)) {
+            event.preventDefault();
+            hashvalue({"38": 0, "40": (slideCount - 2)}[event.keyCode]);
+        }
     }
 
     $.fn.slideshow = function (slides) {
