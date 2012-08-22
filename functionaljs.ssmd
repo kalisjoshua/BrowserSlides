@@ -368,23 +368,23 @@ _
 
 
 === Scope Chain
-<pre>
-    program execution drills down through scopes
-              &darr;
-    +-------------------+
-    |    Global Scope   |
-    |-------------------|
-    | Namespace Context | &larr; single global namespace object (omitted)
-    |-------------------|
-    |    IIFE Context   | &larr; innerObj is assigned to myObject through return
-    |-------------------|
-    |        ...        |
-    |-------------------|
-    | Execution Context | &larr; myObj.get has priviledged access to "hidden"
-    +-------------------+
-              &uarr;
-    variable resolution looks up the scope chain until hitting global
-</pre>
+---
+program execution drills down through scopes
+          &darr;
++-------------------+
+|    Global Scope   |
+|-------------------|
+| Namespace Context | &larr; single global namespace object (omitted)
+|-------------------|
+|    IIFE Context   | &larr; innerObj is assigned to myObject through return
+|-------------------|
+|        ...        |
+|-------------------|
+| Execution Context | &larr; myObj.get has priviledged access to "hidden"
++-------------------+
+          &uarr;
+variable resolution looks up the scope chain until hitting global
+---
 _
 
 
