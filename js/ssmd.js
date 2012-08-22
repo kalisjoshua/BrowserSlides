@@ -1,16 +1,12 @@
 
 (function () {
     "use strict";
-    var nl = "\n";
+
+    var nl = "\n"
+      , types = {"#":"ol","*":"ul"};
 
     function listType (leader) {
-        var types = {"#":"ol","*":"ul"};
-
-        function listType (leader) {
-            return types[leader.slice(-1)];
-        }
-        
-        return listType(leader);
+        return types[leader.slice(-1)];
     }
 
     function tagify (tag, content, attr) {
@@ -39,13 +35,11 @@
 
             // code blocks
             .replace(/(^-{3})\n+([^\1]*?)\n+\1/gm, function (match, garbage, code) {
-                return tagify("pre", tagify("code", code.split("\n").join("<br/>")));
+                return tagify("pre", tagify("code", code.split(nl).join("<br/>")));
             })
 
             // blockquote
-            .replace(/^\s{4}((['"]).*\1)\s*~~\s*(.*)$/gm, function (match, quote, garbage, footer) {
-                return tagify("blockquote", tagify("p", quote) + tagify("footer", footer));
-            })
+            .replace(/^\s{4}((['"]).*\1)\s*~~\s*(.*)$/gm, tagify("blockquote", tagify("p", "$1") + tagify("footer", "$3")))
 
             // paragraphs
             .replace(/^([^#\*<].+)$/gm, tagify("p", "$1"))
@@ -55,7 +49,7 @@
                 var previous = ""
                   , stack = [];
 
-                list = (list + (list.slice(-1) === "\n" ? "" : "\n") +"*")
+                list = (list + (list.slice(-1) === nl ? "" : nl) +"*")
                     .replace(/^([#\*]+)\s*(.*)(?=[\n\W\D]([#\*]+)\s*(.*))$/gm, function (match, leader, text, _leader, _text) {
                         var temp = "";
 
@@ -85,7 +79,7 @@
                     });
 
                 // clean up the additional list item we added above so that we can see the end of the list
-                list = list.split("\n");
+                list = list.split(nl);
                 list.pop();
                 list = list.join("");
 
@@ -93,9 +87,7 @@
             })
 
             // links
-            .replace(/\[([^\]]+)\]\(([^\(]+)\)/g, function (match, link, href) {
-                return tagify("a", link, " href=\"" + href + "\"");
-            })
+            .replace(/\[([^\]]+)\]\(([^\(]+)\)/g, tagify("a", "$1", " href=\"" + "$2" + "\""))
 
             // split on slide terminator
             .split("\n_\n")
@@ -105,6 +97,6 @@
                 return tagify("div", nl + item + nl + footer + nl);
             })
             // join into one string
-            .join("\n");
+            .join(nl);
     };
 }());
