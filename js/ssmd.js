@@ -1,27 +1,55 @@
 
 (function () {
     "use strict";
+    var nl = "\n";
 
     function listType (leader) {
-        return {"#":"ol","*":"ul"}[leader.slice(-1)];
+        var types = {"#":"ol","*":"ul"};
+
+        function listType (leader) {
+            return types[leader.slice(-1)];
+        }
+        
+        return listType(leader);
     }
 
-    function markup (indx, total, src) {
-        src = src
+    function tagify (tag, content, attr) {
+        return "<%1%3>%2</%1>"
+            .replace(/%3/, attr || "")
+            .replace(/%1/g, tag)
+            .replace(/%2/, content);
+    }
+
+    window.ssmd = function (txt) {
+        
+        return txt
+            // remove leading whitespace
+            .replace(/^\s*/, "")
+
+            // remove blank lines
+            .replace(/\n+/gm, "\n")
+
+            // remove trailing closing _
+            .replace(/\n_\n*$/, "")
+
             // title (h1-6) tags
             .replace(/^(=+)\s+(.*)/gm, function (match, p1, p2) {
                 return tagify("h" + p1.length, p2);
             })
+
             // code blocks
             .replace(/(^-{3})\n+([^\1]*?)\n+\1/gm, function (match, garbage, code) {
                 return tagify("pre", tagify("code", code.split("\n").join("<br/>")));
             })
+
             // blockquote
-            .replace(/^\s{4}((['"]).*\1)\s*~~\s*(.*)$/m, function (match, quote, garbage, footer) {
+            .replace(/^\s{4}((['"]).*\1)\s*~~\s*(.*)$/gm, function (match, quote, garbage, footer) {
                 return tagify("blockquote", tagify("p", quote) + tagify("footer", footer));
             })
+
             // paragraphs
-            .replace(/^([^\*#<$\n]+)/gm, tagify("p", "$1"))
+            .replace(/^([^#\*<].+)$/gm, tagify("p", "$1"))
+
             // lists
             .replace(/^(?:([#\*]+)\s*[^$\n]+[\n\W\D])+/gm, function (list, leader) {
                 var previous = ""
@@ -61,38 +89,22 @@
                 list.pop();
                 list = list.join("");
 
-                return list;
+                return list + nl;
             })
+
             // links
             .replace(/\[([^\]]+)\]\(([^\(]+)\)/g, function (match, link, href) {
                 return tagify("a", link, " href=\"" + href + "\"");
-            });
+            })
 
-        return tagify("div", src + tagify("span", indx + " of " + total, " class=\"footer\""), " class=\"slide\"");
-    }
-
-    function tagify (tag, content, attr) {
-        return "<%1%3>%2</%1>\n"
-            .replace(/%3/, attr || "")
-            .replace(/%1/g, tag)
-            .replace(/%2/, content.replace(/^\s*|\s*$/g, ""));
-    }
-    
-    window.ssmd = function (src) {
-        src = src.split("\n_\n");
-        
-        var deck = [],
-            total = src.length - 1;
-        
-        document.title = src[0].
-            replace(/\n+/g, "").
-            replace(/^=\s*/, "").
-            replace("==", " -");
-                
-        while (src.length) {
-            deck.push(markup(deck.length, total, src.shift()));
-        }
-        
-        return deck.join("");
+            // split on slide terminator
+            .split("\n_\n")
+            // wrap slides
+            .map(function (item, indx, slides) {
+                var footer = tagify("footer", indx + " of " + slides.length);
+                return tagify("div", nl + item + nl + footer + nl);
+            })
+            // join into one string
+            .join("\n");
     };
 }());
