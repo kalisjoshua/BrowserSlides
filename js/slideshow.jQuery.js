@@ -17,7 +17,7 @@
         .end()
             .slice(hash + 1)
             .css("left", "100%")
-        .end()
+        .end()                      // display error when navigating backwards to the beginning slide
             .eq(hash)
             .animate({"left": 0});
 
