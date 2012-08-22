@@ -49,7 +49,7 @@ html {
         color: inherit;
         }
 
-.slide {
+div > div {
     border-top: 10px solid;
     font-size: 150%;
     line-height: 1.4em;
@@ -60,11 +60,11 @@ html {
     top: 0;
     width: 100%;
     }
-    .slide * {
+    div > div * {
         position: relative;
         z-index: 100;
     }
-    .slide blockquote {
+    div > div blockquote {
         background: gainsboro;
         display: block;
         font-style: italic;
@@ -73,17 +73,17 @@ html {
         margin: 0;
         padding: 1em 0;
         }
-        .slide blockquote a {
+        div > div blockquote a {
             font-weight: bold;
             }
-        .slide blockquote footer {
+        div > div blockquote footer {
             left: 0;
             padding: 0 40px;
             position: relative;
             text-align: right;
             top: 0;
         }
-    .slide kbd {
+    div > div kbd {
         bottom: .5em;
         color: #F9F9F9;
         font-family: 'Ubuntu', sans-serif;
@@ -93,20 +93,20 @@ html {
         right: 0;
         z-index: 0;
     }
-    .slide ol,
-    .slide ul {
+    div > div ol,
+    div > div ul {
         margin: .5em 0 .5em 100px;
         padding: 0;
         }
-        .slide li ol,
-        .slide li ul {
+        div > div li ol,
+        div > div li ul {
             margin-left: 30px;
             }
-    .slide p {
+    div > div p {
         margin: 0;
         padding: .5em 40px;
         }
-    .slide pre {
+    div > div pre {
         background: #333;
         color: #FFFFFF;
         font-family: 'Ubuntu Mono', sans-serif;
@@ -115,13 +115,13 @@ html {
         padding: .75em 80px;
         position: relative;
         }
-        .slide pre code {
+        div > div pre code {
             display: block;
             }
-        .slide pre p {
+        div > div pre p {
             padding: 0;
             }
-    .slide .footer {
+    div > div > footer {
         border-bottom: 10px solid;
         bottom: 0;
         display: block;
@@ -132,7 +132,7 @@ html {
         text-align: right;
         width: 100%;
         }
-        .slide .footer span {
+        div > div > footer span {
             background: white;
             display: inline-block;
             padding: 0 1em;
