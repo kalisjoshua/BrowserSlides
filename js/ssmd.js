@@ -7,18 +7,14 @@
     }
 
     function markup (indx, total, src) {
-        var
-            previous = ""
-          , stack = [];
-
         src = src
             // title (h1-6) tags
             .replace(/^(=+)\s+(.*)/gm, function (match, p1, p2) {
                 return tagify("h" + p1.length, p2);
             })
             // code blocks
-            .replace(/(^-{3})\n+([^\1]+?)\1/gm, function (match, p1, p2) {
-                return tagify("pre", tagify("code", p2.split("\n").join("<br />")));
+            .replace(/(^-{3})\n+([^\1]*?)\n+\1/gm, function (match, garbage, code) {
+                return tagify("pre", tagify("code", code.split("\n").join("<br/>")));
             })
             // blockquote
             .replace(/^\s{4}((['"]).*\1)\s*~~\s*(.*)$/m, function (match, quote, garbage, footer) {
@@ -63,7 +59,7 @@
                 // clean up the additional list item we added above so that we can see the end of the list
                 list = list.split("\n");
                 list.pop();
-                list = list.join("\n");
+                list = list.join("");
 
                 return list;
             })
