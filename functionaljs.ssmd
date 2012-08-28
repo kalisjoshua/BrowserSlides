@@ -453,26 +453,15 @@ _
 === Lazy evaluation
 Known as Generators, Sequences, or Streams ([StreamJS](http://streamjs.org/)), these constructs only return values on-demand. Collections of infinite length are actually workable without enormous processing power.
 ---
-var jsArray = [1,2,3,4,5,6,7,8,9...];
+var jsArray = [1,2,3,4,5,6,7,8,9/*...*/];
 var simple = Stream.range();
 
-//
 jsArray.length;  // returns, however many were added to this point
 simple.length(); // returns... umm, infinitely loops as it attempts to find the end
 
-//
 simple.take(10).length(); // returns 10
-// below code taken directly from [streamjs.org](http://streamjs.org/)
-function sieve( s ) {  
-    var h = s.head();  
-    return new Stream( h, function () {  
-        return sieve( s.tail().filter( function( x ) {  
-            return x % h != 0;  
-        } ) );  
-    } );  
-}  
-sieve( Stream.range( 2 ) ).take( 10 ).print();
 ---
+Checkout Stream and do some cool things. I would love to see it!
 _
 
 

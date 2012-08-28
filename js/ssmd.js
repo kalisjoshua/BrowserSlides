@@ -7,12 +7,12 @@
 
     function highlight(js) {
         return js
-            .replace(/(\/\/[^$]*)/gm, '<span class="comment">$1</span>')
+            .replace(/(\/\/[^$]*?$)|(\/\*[.\D]*?\*\/)/gm, '<span class="comment">$&</span>')
             .replace(/('.*?')/gm, '<span class="string">$1</span>')
             .replace(/((?=[\-+])(?:[\-+]?\d+(?:\.\d+)?)|(?:\b\d+(?:\.\d+)?))/gm, '<span class="number">$1</span>')
             .replace(/\bnew\s+(\w+)/gm, '<span class="keyword">new</span> <span class="init">$1</span>')
             .replace(/\breturn\b/, '<span class="init">return</span>')
-            .replace(/\b(function|new|throw|var|if|else)\b/gm, '<span class="keyword">$1</span>');
+            .replace(/\b(function|else|for|if|throw|while|var)\b/gm, '<span class="keyword">$1</span>');
     }
 
     function listType (leader) {
@@ -39,7 +39,7 @@
 
             // code blocks
             .replace(/(^-{3})\n+([^\1]*?)\n+\1/gm, function (match, garbage, code) {
-                return tagify("pre", tagify("code", code.split(nl).map(highlight).join("~br~")));
+                return tagify("pre", tagify("code", highlight(code).split(nl).join("~br~")));
             })
 
             // blockquote
