@@ -107,23 +107,15 @@ div > div {
         padding: .5em 40px;
         }
     div > div pre {
-        background: #17232C;
-        color: #FFFFFF;
         font-family: 'Ubuntu Mono', sans-serif;
         line-height: 2.2ex;
         margin: 0;
-        padding: .75em 80px;
         position: relative;
         }
         div > div pre code {
             display: block;
+            padding: .75em 80px;
             }
-            code .init    { color: #2DA0FF; }
-            code .string  { color: #66D77F; }
-            code .number  { color: #FF5896; }
-            code .keyword { color: #FFB74B; }
-            code .comment *,
-            code .comment { color: #BBB5B2; }
     div > div > footer {
         border-bottom: 10px solid;
         bottom: 0;
@@ -140,3 +132,19 @@ div > div {
             display: inline-block;
             padding: 0 1em;
         }
+
+code          { background: #17232C; color: #FFFFFF; }
+code .init    { color: #2DA0FF; }
+code .string  { color: #66D77F; }
+code .number  { color: #FF5896; }
+code .keyword { color: #FFB74B; }
+code .comment *,
+code .comment { color: #BBB5B2; }
+
+.code-light code          { background: #FFF8BF; color: #2C3432; }
+.code-light code .init    { color: #6AA300; }
+.code-light code .string  { color: #DB3F02; }
+.code-light code .number  { color: #FF5896; }
+.code-light code .keyword { color: #F27405; }
+.code-light code .comment *,
+.code-light code .comment { color: #A1ABA8; }

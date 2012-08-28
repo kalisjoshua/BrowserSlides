@@ -9,7 +9,7 @@
         return js
             .replace(/(\/\/[^$]*)/gm, '<span class="comment">$1</span>')
             .replace(/('.*?')/gm, '<span class="string">$1</span>')
-            .replace(/(\b[\-+]?\d+(\.\d+)?)/gm, '<span class="number">$1</span>')
+            .replace(/((?=[\-+])(?:[\-+]?\d+(?:\.\d+)?)|(?:\b\d+(?:\.\d+)?))/gm, '<span class="number">$1</span>')
             .replace(/\bnew\s+(\w+)/gm, '<span class="keyword">new</span> <span class="init">$1</span>')
             .replace(/\breturn\b/, '<span class="init">return</span>')
             .replace(/\b(function|new|throw|var|if|else)\b/gm, '<span class="keyword">$1</span>');

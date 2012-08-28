@@ -377,11 +377,11 @@ program execution drills down through scopes
 |-------------------|
 | Namespace Context | &larr; single global namespace object (omitted)
 |-------------------|
-|    IIFE Context   | &larr; innerObj is assigned to myObject through return
+|    IIFE Context   | &larr; innerObj is assigned to myObject through closure
 |-------------------|
 |        ...        |
 |-------------------|
-| Execution Context | &larr; myObj.get has priviledged access to 'hidden'
+| Execution Context | &larr; myObj.get has priviledged access to hidden
 +-------------------+
           &uarr;
 variable resolution looks up the scope chain until hitting global
@@ -408,8 +408,8 @@ function bind (fn, context, args) {
     }
 }
 var add5 = bind(add, null, [5]);
-add5(10);   // returns 15
-add5(-4);   // returns 1
+add5(10); // returns 15
+add5(-4); // returns 1
 ---
 _
 
