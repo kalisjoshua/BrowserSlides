@@ -107,7 +107,7 @@ div > div {
         padding: .5em 40px;
         }
     div > div pre {
-        background: #333;
+        background: #17232C;
         color: #FFFFFF;
         font-family: 'Ubuntu Mono', sans-serif;
         line-height: 2.2ex;
@@ -118,9 +118,12 @@ div > div {
         div > div pre code {
             display: block;
             }
-        div > div pre p {
-            padding: 0;
-            }
+            code .init    { color: #2DA0FF; }
+            code .string  { color: #66D77F; }
+            code .number  { color: #FF5896; }
+            code .keyword { color: #FFB74B; }
+            code .comment *,
+            code .comment { color: #BBB5B2; }
     div > div > footer {
         border-bottom: 10px solid;
         bottom: 0;

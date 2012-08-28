@@ -3,13 +3,6 @@
 _
 
 
-=== What am I trying to accomplish here?
-* What are some concepts of functional programming
-* How can those concepts be achieved in Javascript
-* Teach myself more about functional programming
-_
-
-
 === Ajenda
 * Introduction
 * Functional Concepts
@@ -26,19 +19,19 @@ _
 
 
 === Where did this guy come from?
-* Started as a Graphic Designer
-** NOT a programmer
-* Moved to Web Design
-** Images
-** CSS
-** HTML
-* Picked up ASP Classic
-* Forced to learn Javascript (HATED all of it!)
-* Learned a little of these
-** PHP4
-** C# .NET 2.0
-** Java
-* Began to LOVE Javascript
+# Started as a Graphic Designer
+#* NOT a programmer
+# Moved to Web Design
+#* Images
+#* CSS
+#* HTML
+# Picked up ASP Classic
+# Forced to learn Javascript (HATED all of it!)
+# Learned a little of these
+#* PHP4
+#* C# .NET 2.0
+#* Java
+# Began to LOVE Javascript
 _
 
 
@@ -47,13 +40,20 @@ _
 _
 
 
+=== What am I trying to accomplish here?
+* What are some concepts of functional programming
+* How can those concepts be achieved in Javascript
+* Teach myself more about functional programming
+_
+
+
 === What are the bad parts of Javascript?
 * Variables is free to be overwritten at any time
 * Type coersion within equality checks are unreliable
-* The "this" value can be tricky for n00bs (as well as everyone else from time to time)
+* The 'this' value can be tricky for n00bs (as well as everyone else from time to time)
 * Blocks are optional for control structures
 * Switch fall-through
-* The "arguments" object inside function calls
+* The 'arguments' object inside function calls
 * Automatic semi-colon insertion
 * The difference in function statements and expressions
 * I rarely use these
@@ -99,15 +99,15 @@ _
 
 === Imperative
 ---
-var message = "Hello ";
-var promptMessage = "What is your name?";
+var message = 'Hello ';
+var promptMessage = 'What is your name?';
 var name = prompt(promptMessage);
 alert(message + name);
 ---
 # Set some variables
 # Ask the user for their name and store that to a variable
 # Finally we greet them with a message including their name.
-Do we see the "Proceedure" here?
+Do we see the 'Proceedure' here?
 _
 
 
@@ -116,19 +116,19 @@ _
 function Greeting (name) {
     this.name = name;
 }
-Greeting.promptMessage = "What is your name?";
+Greeting.promptMessage = 'What is your name?';
 Greeting.prototype.say = function (message) {
     alert(message + this.name);
 }
 var name = prompt(Greeting.promptMessage);
 var user = new Greeting(name);
-user.say("Hello ");
+user.say('Hello ');
 ---
 Here we gain some reusability, albeit with some verbosity.
-# Define a "class"; see the quotes, because Javascript doesn't truly have classes.
-#* Added a "static" property; that is publically available
+# Define a 'class'; see the quotes, because Javascript doesn't truly have classes.
+#* Added a 'static' property; that is publically available
 #* Added a type-based method; prototypically inherited by all instances
-# Create an instance of the "class" with an instance variable of the user's name.
+# Create an instance of the 'class' with an instance variable of the user's name.
 # Greet the user with a message including their name.
 _
 
@@ -136,9 +136,9 @@ _
 === I write a lot of non-functional Javascript
 ---
 $.fn.ready(function () {
-    $(".lookingForPlugins")
+    $('.lookingForPlugins')
         .initializePlugin({
-            myOptions: "Sea Turtles"
+            myOptions: 'Sea Turtles'
             ,noopCallback: function () {}
         });
 });
@@ -179,7 +179,7 @@ _
 
 
 === What is Functional?
-    "In computer science, functional programming is a programming paradigm that treats computation as the evaluation of mathematical functions and avoids state and mutable data. It emphasizes the application of functions, in contrast to the imperative programming style, which emphasizes changes in state. Functional programming has its roots in lambda calculus, a formal system developed in the 1930s to investigate function definition, function application, and recursion. Many functional programming languages can be viewed as elaborations on the lambda calculus." ~~ [wikipedia(1)](http://en.wikipedia.org/wiki/Functional_programming)
+    'In computer science, functional programming is a programming paradigm that treats computation as the evaluation of mathematical functions and avoids state and mutable data. It emphasizes the application of functions, in contrast to the imperative programming style, which emphasizes changes in state. Functional programming has its roots in lambda calculus, a formal system developed in the 1930s to investigate function definition, function application, and recursion. Many functional programming languages can be viewed as elaborations on the lambda calculus.' ~~ [wikipedia](http://en.wikipedia.org/wiki/Functional_programming)
 _
 
 
@@ -231,7 +231,7 @@ _
 
 
 === Functions as values
-* A function is a "value" (object or thing) that can be assigned to an "identifier" (or variable)
+* A function is a 'value' (object or thing) that can be assigned to an 'identifier' (or variable)
 This declaration:
 ---
 function add (a, b) {
@@ -244,8 +244,8 @@ var add = function (a, b) {
     return a + b;
 }
 ---
-The only difference being when they are initialized in the Javascript interpreter. The end result is the same; a function identified as "add".
-    "Function Expressions and Functional Programming are inseparable." ~~ [JavaScript JavaScript(6)](http://javascriptweblog.wordpress.com/2010/07/06/function-declarations-vs-function-expressions/)
+The only difference being when they are initialized in the Javascript interpreter. The end result is the same; a function identified as 'add'.
+    'Function Expressions and Functional Programming are inseparable.' ~~ [JavaScript JavaScript](http://javascriptweblog.wordpress.com/2010/07/06/function-declarations-vs-function-expressions/)
 _
 
 
@@ -287,17 +287,17 @@ a.map(double); // returns [2,4,6,8,10]
 ---
 ... or
 ---
-$("a#clicker")
-    .on("click", function (event) {
+$('a#clicker')
+    .on('click', function (event) {
         event.preventDefault();
-        alert("ooooo, do it again.");
+        alert('ooooo, do it again.');
     });
 ---
 _
 
 
 === Higher Order Functions (cont.)
-Examples: bind, "factories", others..........
+Examples: bind, 'factories', others..........
 ==== Funcitons as returned values
 ---
 // add factory
@@ -316,7 +316,7 @@ or...
 function add (a, b) {
     return a + b;
 }
-var add5 = add.bind(null, 5); // partial function application "topic coming soon"
+var add5 = add.bind(null, 5); // partial function application 'topic coming soon'
 ---
 _
 
@@ -349,10 +349,10 @@ _
 * Objects retain access to the context (scope) in which they were created
 ---
 var formatter = function (str) {
-    return "Want to know a secret? " + str;
+    return 'Want to know a secret? ' + str;
 }
 var myObj = (function (fn) {
-    var hidden = "I have a secret."
+    var hidden = 'I have a secret.'
     var innerObj = {
         get: function () { return fn(hidden); }
         ,set: function (newValue) { hidden = newValue; }
@@ -360,9 +360,9 @@ var myObj = (function (fn) {
     return innerObj;
 }(formatter));
 
-myObj.get();  // returns "Want to know a secret? I have a secret."
-myObj.set("Javascript is awesome!");
-myObj.get();  // returns "Want to know a secret? Javascript is awesome!"
+myObj.get();  // returns 'Want to know a secret? I have a secret.'
+myObj.set('Javascript is awesome!');
+myObj.get();  // returns 'Want to know a secret? Javascript is awesome!'
 myObj.hidden; // undefined
 ---
 _
@@ -381,7 +381,7 @@ program execution drills down through scopes
 |-------------------|
 |        ...        |
 |-------------------|
-| Execution Context | &larr; myObj.get has priviledged access to "hidden"
+| Execution Context | &larr; myObj.get has priviledged access to 'hidden'
 +-------------------+
           &uarr;
 variable resolution looks up the scope chain until hitting global
@@ -398,7 +398,7 @@ function add (a, b) {
 var add5 = add.bind(null, 5);
 ---
 The bind method of the Function object allows us to do two things:
-# Explicitly set the context a function will execute with; value of "this" inside the function
+# Explicitly set the context a function will execute with; value of 'this' inside the function
 # Pre-determine arguments that will be passed in
 ---
 // !WARNING! unsafe for actual use
@@ -451,7 +451,28 @@ _
 
 
 === Lazy evaluation
-[StreamJS(4)](http://streamjs.org/)
+Known as Generators, Sequences, or Streams ([StreamJS](http://streamjs.org/)), these constructs only return values on-demand. Collections of infinite length are actually workable without enormous processing power.
+---
+var jsArray = [1,2,3,4,5,6,7,8,9...];
+var simple = Stream.range();
+
+//
+jsArray.length;  // returns, however many were added to this point
+simple.length(); // returns... umm, infinitely loops as it attempts to find the end
+
+//
+simple.take(10).length(); // returns 10
+// below code taken directly from [streamjs.org](http://streamjs.org/)
+function sieve( s ) {  
+    var h = s.head();  
+    return new Stream( h, function () {  
+        return sieve( s.tail().filter( function( x ) {  
+            return x % h != 0;  
+        } ) );  
+    } );  
+}  
+sieve( Stream.range( 2 ) ).take( 10 ).print();
+---
 _
 
 
@@ -460,7 +481,7 @@ _
 _
 
 
-    "Programming in a functional style can also be accomplished in languages that aren't specifically designed for functional programming." ~~ [wikipedia(1)](http://en.wikipedia.org/wiki/Functional_programming)
+    'Programming in a functional style can also be accomplished in languages that aren't specifically designed for functional programming.' ~~ [wikipedia](http://en.wikipedia.org/wiki/Functional_programming)
 
 We can gain some of the benefits that Functional offers us by just working in that way - don't rely on side affects.
 _
