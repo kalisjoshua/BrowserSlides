@@ -427,26 +427,15 @@ var resultC = fnC(resultB);     // 22
 // or
 var result = fnC(fnB(fnA(7)));  // 22
 ---
-To be cont...
-_
-
-
-=== Composition (cont.)
+with composition:
 ---
-function fnA (_) { return _ + 2; }
-function fnB (_) { return _ * 3; }
-function fnC (_) { return _ - 5; }
-// ...
 var compositionABC = compose(fnA, fnB, fnC);
-// ...
 var result = compositionABC(7);             // 22
+// ...
 var map = [13, 17, 23].map(compositionABC); // [40, 52, 70]
 ---
-* Reusable
-* Passable
-* Optimal for [looping, maping, etc.]
-* Composable
-* Testable
+
+Reusable, Passable, Composable, Testable, and more.
 _
 
 
@@ -465,12 +454,22 @@ Checkout Stream and do some cool things. I would love to see it!
 _
 
 
-=== Continuations?
-[Continuation-Passing Style?](http://marijnhaverbeke.nl/cps/)
+=== Continuations
+    "[a reification of] an instance of a computational process at a given point in the process's execution" ~~ [http://eriwen.com/](http://eriwen.com/javascript/cps-tail-call-elimination/)
+Javascript does not have support for Continuations natively; however the Rhino environment does provide them as first-class objects.
+* Resume execution with pre-existing state
+* Return values from a function multiple times with (possibly) different values
 _
 
 
-    'Programming in a functional style can also be accomplished in languages that aren't specifically designed for functional programming.' ~~ [wikipedia](http://en.wikipedia.org/wiki/Functional_programming)
+=== Continuation-Passing Style (CPS)
+    "No procedure is allowed to return to its caller--ever... Procedures can take a callback to invoke upon their return value." ~~ [By example: Continuation-passing style in JavaScript](http://matt.might.net/articles/by-example-continuation-passing-style/)
+
+stack overflow problems for deeply nested calls due to no tail optimization
+_
+
+
+    "Programming in a functional style can also be accomplished in languages that aren't specifically designed for functional programming." ~~ [wikipedia](http://en.wikipedia.org/wiki/Functional_programming)
 
 We can gain some of the benefits that Functional offers us by just working in that way - don't rely on side affects.
 _
@@ -496,6 +495,8 @@ _
 # [Stream.js](http://streamjs.org/)
 # [Functional Programming - igstan.ro](http://igstan.ro/files/functional-programming.pdf)
 # [Function Declarations vs. Function Expressions](http://javascriptweblog.wordpress.com/2010/07/06/function-declarations-vs-function-expressions/)
+# [By example: Continuation-passing style in JavaScript](http://matt.might.net/articles/by-example-continuation-passing-style/)
+# [Continuation-Passing Style](http://marijnhaverbeke.nl/cps/)
 _
 
 

@@ -11,7 +11,7 @@
             .replace(/('.*?')/gm, '<span class="string">$1</span>')
             .replace(/((?=[\-+])(?:[\-+]?\d+(?:\.\d+)?)|(?:\b\d+(?:\.\d+)?))/gm, '<span class="number">$1</span>')
             .replace(/\bnew\s+(\w+)/gm, '<span class="keyword">new</span> <span class="init">$1</span>')
-            .replace(/\breturn\b/, '<span class="init">return</span>')
+            .replace(/\breturn\b/gm, '<span class="init">return</span>')
             .replace(/\b(function|else|for|if|throw|while|var)\b/gm, '<span class="keyword">$1</span>');
     }
 
