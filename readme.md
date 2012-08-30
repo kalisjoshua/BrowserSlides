@@ -2,3 +2,9 @@ This started as my personal jQuery plugin for presentation slides but has become
 
 * [Functional Javascript](http://kalisjoshua.github.com/BrowserSlides/index.html#functionaljs)
 * [jQuery Plugins](http://kalisjoshua.github.com/BrowserSlides/index.html#jqueryplugins)
+
+# TODO
+* line numbering
+* TOC generator
+** anchor to headings
+* next slide preview
