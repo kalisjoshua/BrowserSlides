@@ -7,12 +7,13 @@
 
     function highlight(js) {
         return js
-            .replace(/(\/\/[^$]*?$)|(\/\*[.\D]*?\*\/)/gm, '<span class="comment">$&</span>')
+            .replace(/(?:^|\s+)(?:\/\/[^$]*?$)|(?:\/\*[.\D]*?\*\/)/gm, '<span class="comment">$&</span>')
             .replace(/('.*?')/gm, '<span class="string">$1</span>')
+            .replace(/\s+(\/.+\/)([\.\s;])/g, '<span class="string">$1</span>$2')
             .replace(/((?=[\-+])(?:[\-+]?\d+(?:\.\d+)?)|(?:\b\d+(?:\.\d+)?))/gm, '<span class="number">$1</span>')
             .replace(/\bnew\s+(\w+)/gm, '<span class="keyword">new</span> <span class="init">$1</span>')
             .replace(/\breturn\b/gm, '<span class="init">return</span>')
-            .replace(/\b(function|else|for|if|throw|while|var)\b/gm, '<span class="keyword">$1</span>');
+            .replace(/\b(break|case|catch|continue|debugger|default|delete|do|else|finally|for|function|if|in|instanceof|switch|this|throw|try|typeof|var|void|while|with)\b/gm, '<span class="keyword">$1</span>');
     }
 
     function listType (leader) {
@@ -88,7 +89,7 @@
             })
 
             // title (h1-6) tags
-            .replace(/^(=+)\s+(.*)/gm, function (match, p1, p2) {
+            .replace(/^(=[=\+]*)\s+(.*)/gm, function (match, p1, p2) {
                 return tagify("h" + p1.length, p2);
             })
 
