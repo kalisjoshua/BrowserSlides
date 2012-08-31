@@ -331,19 +331,16 @@ Simple math: 1 + (2 + 3) + 4 = 10
 Reduces to: 1 + 5 + 4 = 10
 ---
 var add = function (a, b) {return a + b;};
-var result = add(1, 2); // result is now 3
----
-Baby steps.
----
-var result = (add)(1, 2); // remember, parenthesis are for grouping
----
-Slightly bigger step.
----
-var result = (function (a, b) {return a + b;})(1, 2); // result is now 3
----
-Different formatting
----
-var result = (function (a, b) {
+add(1, 2); // returns 3 every time
+
+// Baby step, remember from math class, parens are just grouping
+(add)(1, 2);
+
+// A slightly bigger step
+(function (a, b) {return a + b;})(1, 2);
+
+// Just different formatting
+(function (a, b) {
     return a + b;
 })(1, 2);
 ---
@@ -374,7 +371,7 @@ _
 
 
 === Scope Chain
----
++++
 program execution drills down through scopes
           &darr;
 +-------------------+
@@ -390,7 +387,7 @@ program execution drills down through scopes
 +-------------------+
           &uarr;
 variable resolution looks up the scope chain until hitting global
----
++++
 _
 
 
@@ -468,15 +465,17 @@ _
 
 
 === Continuation-Passing Style (CPS)
-    "No procedure is allowed to return to its caller--ever... Procedures can take a callback to invoke upon their return value." ~~ [By example: Continuation-passing style in JavaScript](http://matt.might.net/articles/by-example-continuation-passing-style/)
 Commonly known as callbacks in the Javascript community.
 ---
-mythical_AJAX_function({
+magicAJAX({
     data: JSON.stringify({name: 'Joshua', rank: 'AWESOME', serial_number: 1})
+    ,fail: function (err, data) {/* fail gracfully with a curtsy :)~ */}
+    ,success: function (data)   {/* do stuff with the retrieved data */}
     ,url: 'http://some_domain.tld/folder/file.ext'
 });
 ---
-stack overflow problems for deeply nested calls due to no tail optimization
+Possible stack overflow problems for deeply nested calls due to no tail optimization.
+    "No procedure is allowed to return to its caller--ever... Procedures can take a callback to invoke upon their return value." ~~ [By example: Continuation-passing style in JavaScript](http://matt.might.net/articles/by-example-continuation-passing-style/)
 _
 
 
