@@ -10,8 +10,8 @@ _
 _
 
 
-=== About me - Joshua Kalis
-Front-end engineer for @QuickenLoans.
+==+ Introduction
+I am a Front-end engineer for @QuickenLoans. I love making things that work (functional).
 * [JoshuaKalis.com](http://joshuakalis.com)
 * [@kalisjoshua](http://twitter.com/kalisjoshua)
 * [Github.com/kalisjoshua](https://github.com/kalisjoshua)
@@ -32,6 +32,7 @@ _
 #* C# .NET 2.0
 #* Java
 # Began to LOVE Javascript
+Self taught mostly.
 _
 
 
@@ -41,9 +42,9 @@ _
 
 
 === What am I trying to accomplish here?
-* What are some concepts of functional programming
-* How can those concepts be achieved in Javascript
-* Teach myself more about functional programming
+* Concepts of functional programming
+* How in Javascript
+* Teach myself -  basically I don't care about any of you
 _
 
 
@@ -89,7 +90,7 @@ _
 _
 
 
-=== Programming Paradigms
+==+ Programming Paradigms
 * Imperative (Proceedural, Structured)
 * Object Oriented
 * Functional
@@ -133,22 +134,25 @@ Here we gain some reusability, albeit with some verbosity.
 _
 
 
-=== I write a lot of non-functional Javascript
+=== I write non-functional Javascript
 ---
-$.fn.ready(function () {
-    $('.lookingForPlugins')
-        .initializePlugin({
-            myOptions: 'Sea Turtles'
-            ,noopCallback: function () {}
-        });
-});
+function validate (form) {
+    email = /\bvalidate-[^e,\s]*e[^e,\s]*\b/;
+    date = /\bvalidate-[^d,\s]*d\d[^d,\s]*\b/;
+    for (var i = 0; i < form.length; i++) {
+        if (valid) {
+            emailField = email.test(node.className) && trim(node.value) != "";
+            dateField = date.test(node.className) && trim(node.value) != "";
+            if (emailField) {/* do more conditionals and state changing */}
+            if (dateField)  {/* do more conditionals and state changing */}
+        }
+    }
+}
 ---
 Just to set you at ease, I am not a functional Javascript doyen writing everything in a functional manner. Actually, from time to time, I even write Javascript that doesn't even function.
 ---
 function myAwesomeness (arg) {
-    // do the most awesome thing to arg
-    // fully unit tested
-    // purely functional
+    // do the most awesome thing to arg, fully unit tested, purely functional
 }
 ...
 myAwesomeness(); // derp derp
@@ -178,7 +182,7 @@ _
  -->
 
 
-=== What is Functional?
+==+ What is Functional?
     'In computer science, functional programming is a programming paradigm that treats computation as the evaluation of mathematical functions and avoids state and mutable data. It emphasizes the application of functions, in contrast to the imperative programming style, which emphasizes changes in state. Functional programming has its roots in lambda calculus, a formal system developed in the 1930s to investigate function definition, function application, and recursion. Many functional programming languages can be viewed as elaborations on the lambda calculus.' ~~ [wikipedia](http://en.wikipedia.org/wiki/Functional_programming)
 _
 
@@ -189,6 +193,7 @@ _
 
 
 === What does functional mean?
+Here are the topics I found to be most talked about within the FP research that I performed for this talk.
 * Purity (referentially transparent)
 * Functions as values
 * Higer order functions
@@ -456,7 +461,7 @@ _
 
 === Continuations
     "[a reification of] an instance of a computational process at a given point in the process's execution" ~~ [http://eriwen.com/](http://eriwen.com/javascript/cps-tail-call-elimination/)
-Javascript does not have support for Continuations natively; however the Rhino environment does provide them as first-class objects.
+Javascript does not support Continuations natively; however, the Rhino environment does provide them as first-class objects.
 * Resume execution with pre-existing state
 * Return values from a function multiple times with (possibly) different values
 _
@@ -464,7 +469,13 @@ _
 
 === Continuation-Passing Style (CPS)
     "No procedure is allowed to return to its caller--ever... Procedures can take a callback to invoke upon their return value." ~~ [By example: Continuation-passing style in JavaScript](http://matt.might.net/articles/by-example-continuation-passing-style/)
-
+Commonly known as callbacks in the Javascript community.
+---
+mythical_AJAX_function({
+    data: JSON.stringify({name: 'Joshua', rank: 'AWESOME', serial_number: 1})
+    ,url: 'http://some_domain.tld/folder/file.ext'
+});
+---
 stack overflow problems for deeply nested calls due to no tail optimization
 _
 
@@ -484,7 +495,7 @@ _
 
 
 = #FunctionalJS
-== Go forth and be productive
+== Go, now, and be functional
 _
 
 
