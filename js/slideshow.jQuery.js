@@ -82,17 +82,17 @@
         $(window).hashchange(cleanup);
     
         // setup navigation for desktop and mobile
-        $(document).keydown(nav);
+        $(document).on("keydown", nav);
 
         $("#help a")
-            .click(function (event) {
+            .on("click", function (event) {
                 event.preventDefault();
                 event.stopPropagation();
                 $(this)
                     .closest("p")
                     .children("span")
                     .remove();
-                $(document).click(nav);
+                $(document).on("click", nav);
             });
 
         presentation = window.location.hash.match(/[^#\-]+/)[0];
