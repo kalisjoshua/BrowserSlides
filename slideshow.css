@@ -116,6 +116,10 @@ div > div {
             display: block;
             padding: .75em 80px;
             }
+        div > div pre pre {
+            background: gainsboro;
+            padding: .75em 80px;
+            }
     div > div > footer {
         border-bottom: 10px solid;
         bottom: 0;

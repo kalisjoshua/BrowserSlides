@@ -88,12 +88,17 @@
                 return list + nl;
             })
 
+            // pre(formatted text) blocks
+            .replace(/(^\+{3})\n+([^\1]*?)\n+\1/gm, function (match, garbage, text) {
+                return tagify("pre", tagify("pre", text.split(nl).join("~br~")));
+            })
+
             // title (h1-6) tags
             .replace(/^(=[=\+]*)\s+(.*)/gm, function (match, p1, p2) {
                 return tagify("h" + p1.length, p2);
             })
 
-            // paragraphs
+            // paragraphs - needs to be last so that all other formatting will prevent paragraphs being where they shouldn't
             .replace(/^([^#\*<].+)$/gm, function (match, content) {
                 content = content.replace(/(?:^\s*)|(?:\s*$)/, "");
                 return (/^</).test(content) ? content : tagify("p", content);
