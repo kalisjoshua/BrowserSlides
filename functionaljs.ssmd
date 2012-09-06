@@ -3,7 +3,7 @@
 _
 
 
-=== Ajenda
+=== Agenda
 * Introduction
 * Functional Concepts
 * Examples
@@ -50,7 +50,7 @@ _
 
 === What are the bad parts of Javascript?
 * Variables is free to be overwritten at any time
-* Type coersion within equality checks are unreliable
+* Type coercion within equality checks are unreliable
 * The 'this' value can be tricky for n00bs (as well as everyone else from time to time)
 * Blocks are optional for control structures
 * Switch fall-through
@@ -84,14 +84,14 @@ _
 * Useful
 ** People like having interactive web pages
 ** Employable skill
-* Multiparadigm
+* Multi-paradigm
 ** Write however you want
 * and more (probably)...
 _
 
 
 ==+ Programming Paradigms
-* Imperative (Proceedural, Structured)
+* Imperative (Procedural, Structured)
 * Object Oriented
 * Functional
 * Others - yes there are lots.
@@ -125,9 +125,9 @@ var name = prompt(Greeting.promptMessage);
 var user = new Greeting(name);
 user.say('Hello ');
 ---
-Here we gain some reusability, albeit with some verbosity.
+Here we gain some re-usability, albeit with some verbosity.
 # Define a 'class'; see the quotes, because Javascript doesn't truly have classes.
-#* Added a 'static' property; that is publically available
+#* Added a 'static' property; that is publicly available
 #* Added a type-based method; prototypically inherited by all instances
 # Create an instance of the 'class' with an instance variable of the user's name.
 # Greet the user with a message including their name.
@@ -172,13 +172,13 @@ _
             do one thing
             work together - composition
     Why is functional programming a good thing? What benefits can be gained?
-        lazyness - write once, use over and over everwhere
+        laziness - write once, use over and over everywhere
         test-ability leads to confidence in the execution
         purity/referential transparency
             caching/memoizing
         reduced function length and complexity
     Traditionally in OOP functions (methods) must be a part of an object
-        lamba expressions
+        lambda expressions
  -->
 
 
@@ -196,7 +196,7 @@ _
 Here are the topics I found to be most talked about within the FP research that I performed for this talk.
 * Purity (referentially transparent)
 * Functions as values
-* Higer order functions
+* Higher order functions
 * Closure/lexical scoping
 * Curry-ing/partial application
 * Composition
@@ -303,7 +303,7 @@ _
 
 === Higher Order Functions (cont.)
 Examples: bind, 'factories', others..........
-==== Funcitons as returned values
+==== Functions as returned values
 ---
 // add factory
 function makeAdder (preValue) {
@@ -383,7 +383,7 @@ program execution drills down through scopes
 |-------------------|
 |        ...        |
 |-------------------|
-| Execution Context | &larr; myObj.get has priviledged access to hidden
+| Execution Context | &larr; myObj.get has privileged access to hidden
 +-------------------+
           &uarr;
 variable resolution looks up the scope chain until hitting global
@@ -469,7 +469,7 @@ Commonly known as callbacks in the Javascript community.
 ---
 magicAJAX({
     data: JSON.stringify({name: 'Joshua', rank: 'AWESOME', serial_number: 1})
-    ,fail: function (err, data) {/* fail gracfully with a curtsy :)~ */}
+    ,fail: function (err, data) {/* fail gracefully with a curtsy :)~ */}
     ,success: function (data)   {/* do stuff with the retrieved data */}
     ,url: 'http://some_domain.tld/folder/file.ext'
 });
