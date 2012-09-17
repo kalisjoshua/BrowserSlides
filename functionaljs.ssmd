@@ -485,11 +485,12 @@ We can gain some of the benefits that Functional offers us by just working in th
 _
 
 
-= Example Time!
+=== Point Free
 _
 
 
-=== Point Free
+= Example Time!
+upvotes by  the ninja turtles
 _
 
 
@@ -507,6 +508,7 @@ _
 # [Function Declarations vs. Function Expressions](http://javascriptweblog.wordpress.com/2010/07/06/function-declarations-vs-function-expressions/)
 # [By example: Continuation-passing style in JavaScript](http://matt.might.net/articles/by-example-continuation-passing-style/)
 # [Continuation-Passing Style](http://marijnhaverbeke.nl/cps/)
+# [lz](https://github.com/goatslacker/lz)
 _
 
 
