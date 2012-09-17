@@ -44,7 +44,7 @@
             })
 
             // blockquote
-            .replace(/^\s{4}((['"]).*\1)\s+~~\s*(.*)$/gm, tagify("blockquote", tagify("p", "$1") + tagify("footer", "$3")))
+            .replace(/^\s{4}((['"]).*\1)\s+~~\s*(.*)$/gm, tagify("blockquote", tagify("p", "$1") + tagify("cite", "$3")))
 
             // lists
             .replace(/^(?:([#\*]+)\s*[^$\n]+[\n\W\D])+/gm, function (list, leader) {
