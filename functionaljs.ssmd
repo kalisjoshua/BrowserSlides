@@ -8,36 +8,26 @@ _
 _
 
 
-=== Ajenda
+=== Agenda
 * Introduce Myself
 * Functional Programming Concepts in JavaScript
 * Functional Code Refactoring Examples
 _
 
 
-==+ Introduction
-I am a Front-end engineer for [@QuickenLoans](http://twitter.com/@QuickenLoans). I love making things that work (functional).
-* [JoshuaKalis.com](http://joshuakalis.com)
+==+ Me
+* Front-end engineer for [@QuickenLoans](http://twitter.com/@QuickenLoans)
+* website [JoshuaKalis.com](http://joshuakalis.com)
 * [twitter.com/@kalisjoshua](http://twitter.com/kalisjoshua)
-* [github.com/kalisjoshua](https://github.com/kalisjoshua)
-_
 
-
-=== Where did this guy come from?
-# Started as a Graphic Designer
-#* NOT a programmer
-# Moved to Web Design
-#* Images
-#* CSS
-#* HTML
+==== Brief experience time-line
+# Started as a Graphic Designer, NOT a programmer
+# Moved to Web Design through images first then CSS and HTML
 # Picked up ASP Classic
 # Forced to learn Javascript (HATED all of it!)
-# Learned a little of these
-#* PHP4
-#* C# .NET 2.0
-#* Java
+# Learned a little of these: PHP4, C# .NET 2.0, Java
 # Began to LOVE Javascript
-Self taught mostly.
+All self-taught mostly.
 _
 
 
@@ -48,7 +38,7 @@ _
 
 === What am I trying to accomplish here?
 * Concepts of functional programming
-* How in Javascript
+* How to in Javascript
 * Teach myself -  basically I don't care about any of you
 _
 
@@ -96,7 +86,7 @@ _
 
 
 ==+ Programming Paradigms
-* Imperative, Proceedural, or Structured - 1954 FORTRAN
+* Imperative, Procedural, or Structured - 1954 FORTRAN
 * Object Oriented - 1960s Simula 67
 * Functional - 1960s LISP
 * Others? - [yes, there are lots](http://en.wikipedia.org/wiki/Programming_paradigm#Programming_paradigms)
@@ -201,8 +191,8 @@ Here are the topics I found to be most talked about within the FP research that 
 * Purity
 * Functions as values
 * Higher order functions
-* Closure/lexical scoping
-* Curry-ing/partial application
+* Closure - lexical scoping
+* Curry-ing - partial application
 * Composition
 * Lazy evaluation
 * Continuations
@@ -345,7 +335,7 @@ add(1, 2); // returns 3 every time
 _
 
 
-=== Closure/lexical scoping
+=== Closure - lexical scoping
 * Objects retain access to the context (scope) in which they were created
 ---
 var formatter = function (str) {
@@ -389,7 +379,7 @@ variable resolution looks up the scope chain until hitting global
 _
 
 
-=== Curry-ing/partial application
+=== Curry-ing - partial application
 Reducing the number of arguments by applying others previously.
 ---
 function add (a, b) {
@@ -399,7 +389,7 @@ var add5 = add.bind(null, 5);
 ---
 The bind method of the Function object allows us to do two things:
 # Explicitly set the context a function will execute with; value of 'this' inside the function
-# Pre-determine arguments that will be passed in
+# Predetermine arguments that will be passed in
 ---
 // !WARNING! unsafe for actual use
 function partial (fn) {
