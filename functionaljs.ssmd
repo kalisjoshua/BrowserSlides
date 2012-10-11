@@ -81,7 +81,7 @@ _
 ** Employable skill
 * Multi-paradigm
 ** Write however you want
-* and more (probably)...
+* and more (probably) but lets move on
 _
 
 
@@ -315,6 +315,7 @@ _
 
 
 === IIFE - Immediately Invoked Function Expression
+    "Formerly referred to as Self Invoking Anonymous Functions (SIAF)." ~~ .
 Simple math: 1 + (2 + 3) + 4 = 10
 Reduces to: 1 + 5 + 4 = 10
 ---
