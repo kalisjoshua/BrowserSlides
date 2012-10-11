@@ -55,7 +55,7 @@ _
 
 === What are the bad parts of Javascript?
 * Variables is free to be overwritten at any time
-* Type coersion within equality checks are unreliable
+* Type coercion within equality checks are unreliable
 * The 'this' value can be tricky for n00bs (as well as everyone else from time to time)
 * Blocks are optional for control structures
 * Switch fall-through
@@ -89,9 +89,9 @@ _
 * Useful
 ** People like having interactive web pages
 ** Employable skill
-* Multiparadigm
+* Multi-paradigm
 ** Write however you want
-* and more probably
+* and more (probably)...
 _
 
 
@@ -99,7 +99,7 @@ _
 * Imperative, Proceedural, or Structured - 1954 FORTRAN
 * Object Oriented - 1960s Simula 67
 * Functional - 1960s LISP
-* Others - [yes there are lots](http://en.wikipedia.org/wiki/Programming_paradigm#Programming_paradigms)
+* Others? - [yes, there are lots](http://en.wikipedia.org/wiki/Programming_paradigm#Programming_paradigms)
 _
 
 
@@ -131,9 +131,9 @@ var name = prompt(Greeting.promptMessage);
 var user = new Greeting(name);
 user.say('Hello ');
 ---
-Here we gain some reusability, albeit with some verbosity.
+Here we gain some re-usability, albeit with some verbosity.
 # Define a 'class'; see the quotes, because Javascript doesn't truly have classes.
-#* Added a 'static' property; that is publically available
+#* Added a 'static' property; that is publicly available
 #* Added a type-based method; prototypically inherited by all instances
 # Create an instance of the 'class' with an instance variable of the user's name.
 # Greet the user with a message including their name.
@@ -178,11 +178,11 @@ _
             do one thing
             work together - composition
     Why is functional programming a good thing? What benefits can be gained?
-        lazyness - write once, use over and over everwhere
+        laziness - write once, use over and over everywhere
         test-ability leads to confidence in the execution
         reduced function length and complexity
     Traditionally in OOP functions (methods) must be a part of an object
-        lamba expressions
+        lambda expressions
  -->
 
 
@@ -198,9 +198,9 @@ _
 
 === What does functional mean?
 Here are the topics I found to be most talked about within the FP research that I performed for this talk.
-* Purity (referentially transparent)
+* Purity
 * Functions as values
-* Higer order functions
+* Higher order functions
 * Closure/lexical scoping
 * Curry-ing/partial application
 * Composition
@@ -290,18 +290,10 @@ _
 Examples: map, filter, forEach/each, some, every, click, focus, load, keydown, ... etc.
 ==== Functions as arguments
 ---
-var a = [1,2,3,4,5];
-var double = function (x) {
-    return x * 2;
-}
-a.map(double); // returns [2,4,6,8,10]
----
-... or
----
 $('a#clicker')
     .on('click', function (event) {
         event.preventDefault();
-        alert('ooooo, do it again.');
+        alert('oh yeah!');
     });
 ---
 _
@@ -309,7 +301,7 @@ _
 
 === Higher Order Functions (cont.)
 Examples: bind, 'factories', others...
-==== Funcitons as returned values
+==== Functions as returned values
 ---
 // add factory
 function makeAdder (preValue) {
@@ -378,8 +370,7 @@ _
 
 === Scope Chain
 +++
-program execution drills down through scopes
-          &darr;
+          &darr; program execution drills down through scopes
 +-------------------+
 |    Global Scope   |
 |-------------------|
@@ -389,10 +380,9 @@ program execution drills down through scopes
 |-------------------|
 |        ...        |
 |-------------------|
-| Execution Context | &larr; myObj.get has priviledged access to hidden
+| Execution Context | &larr; myObj.get has privileged access to hidden
 +-------------------+
-          &uarr;
-variable resolution looks up the scope chain until hitting global
+          &uarr; variable resolution looks up the scope chain until hitting global
 +++
 _
 
@@ -411,7 +401,7 @@ The bind method of the Function object allows us to do two things:
 ---
 // !WARNING! unsafe for actual use
 function partial (fn) {
-    var args = [].slice.call(arguments, 1); // get all arguments after the first
+    var args = [].slice.call(arguments, 1);     // get all arguments after the first
     return function () {
         fn.apply(null, args.concat(arguments)); // add args to partially applied args
     }
@@ -475,7 +465,7 @@ Commonly known as callbacks in the Javascript community.
 ---
 magicAJAX({
     data: JSON.stringify({name: 'Joshua', rank: 'AWESOME', serial_number: 1})
-    ,fail: function (err, data) {/* fail gracfully with a curtsy :)~ */}
+    ,fail: function (err, data) {/* fail gracefully with a curtsy :)~ */}
     ,success: function (data)   {/* do stuff with the retrieved data */}
     ,url: 'http://some_domain.tld/folder/file.ext'
 });
