@@ -370,7 +370,8 @@ _
 
 === Scope Chain
 +++
-          &darr; program execution drills down through scopes
+program execution drills down through scopes
+          &darr;
 +-------------------+
 |    Global Scope   |
 |-------------------|
@@ -382,7 +383,8 @@ _
 |-------------------|
 | Execution Context | &larr; myObj.get has privileged access to hidden
 +-------------------+
-          &uarr; variable resolution looks up the scope chain until hitting global
+          &uarr;
+variable resolution looks up the scope chain until hitting global
 +++
 _
 
