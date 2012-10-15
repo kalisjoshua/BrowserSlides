@@ -76,7 +76,8 @@ div > div {
         div > div blockquote a {
             font-weight: bold;
             }
-        div > div blockquote footer {
+        div > div blockquote cite {
+            display: block;
             left: 0;
             padding: 0 40px;
             position: relative;
