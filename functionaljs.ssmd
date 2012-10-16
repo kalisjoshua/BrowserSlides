@@ -10,6 +10,7 @@ _
 
 === Agenda
 * Introduce Myself
+* Why functional?
 * Functional Programming Concepts in JavaScript
 * Functional Code Refactoring Examples
 _
@@ -18,7 +19,7 @@ _
 ==+ Me
 * Front-end engineer for [@QuickenLoans](http://twitter.com/@QuickenLoans)
 * website [JoshuaKalis.com](http://joshuakalis.com)
-* [twitter.com/@kalisjoshua](http://twitter.com/kalisjoshua)
+* twitter.com/[@kalisjoshua](http://twitter.com/kalisjoshua)
 
 ==== Brief experience time-line
 # Started as a Graphic Designer, NOT a programmer
@@ -36,10 +37,17 @@ _
 _
 
 
-=== What am I trying to accomplish here?
+=== What am I trying to accomplish?
 * Concepts of functional programming
-* How to in Javascript
-* Teach myself -  basically I don't care about any of you
+* How to write Funtional Javascript
+* Teach myself - basically I don't care about any of you
+_
+
+
+=== Why functional?
+* Greater Confidence - testable code promotes reliable re-writing.
+* Fewer Bugs - testable code is code that can be objectively ensured to have fewer bugs.
+* More Laziness - modular code can be used many places without modification.
 _
 
 
@@ -239,7 +247,7 @@ function add (a, b) {
 ---
 ... is very similar to this expression:
 ---
-var add = function (a, b) {
+var add = function add (a, b) {
     return a + b;
 }
 ---
@@ -446,10 +454,11 @@ _
 
 
 === Continuations
+Continuations are not possible in Javascript. [http://idea-log.blogspot.com/](http://idea-log.blogspot.com/2005/10/why-are-continuations-so-confusing-and.html)
+Think of the old "goto" statements of yore but add in the fact that state of computation/execution is kept.
     "[a reification of] an instance of a computational process at a given point in the process's execution" ~~ [http://eriwen.com/](http://eriwen.com/javascript/cps-tail-call-elimination/)
 Javascript does not support Continuations natively; however, the Rhino environment does provide them as first-class objects.
 * Resume execution with pre-existing state
-* Return values from a function multiple times with (possibly) different values
 _
 
 
@@ -498,6 +507,7 @@ _
 # [By example: Continuation-passing style in JavaScript](http://matt.might.net/articles/by-example-continuation-passing-style/)
 # [Continuation-Passing Style](http://marijnhaverbeke.nl/cps/)
 # [lz](https://github.com/goatslacker/lz)
+# [http://idea-log.blogspot.com/](http://idea-log.blogspot.com/2005/10/why-are-continuations-so-confusing-and.html)
 _
 
 
