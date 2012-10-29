@@ -1336,71 +1336,6 @@ var records = [
 ];
 
 
-
-
-//
-// All-in-one function does it all but is very rigid and tightly coupled
-//
-
-if (false) {
-  var most, results = {};
-
-  for (var i = 0; i < records.length; i++) {
-    if (results[records[i].Color]) {
-      results[records[i].Color]++;
-    } else {
-      results[records[i].Color] = 1;
-    }
-  }
-
-  for (var color in results) {
-    if (!most || most.total < results[color]) {
-      most = {color: color, total: results[color]};
-    }
-  }
-
-  console.log(most);
-}
-
-if (false) {
-  var i = 0, len = records.length, most, results = {};
-
-  for (; i < len; i++) {
-    results[records[i].Color] = 1 + (results[records[i].Color] || 0);
-    // or
-    // results[records[i].Color] = 1 + ~~results[records[i].Color];
-    // or
-    // results[records[i].Color] = ++results[records[i].Color] || 1;
-    // or
-    // results[records[i].Color] = results[records[i].Color] ? 1 + results[records[i].Color] : 1;
-  }
-
-  for (var color in results) {
-    if (!most || most.total < results[color]) {
-      most = {color: color, total: results[color]};
-    }
-  }
-
-  console.log(most);
-}
-
-
-//
-// Now you want add some logic like, "only between certain dates"...
-//
-// Do you create new functions with some duplicated code or add argument options?
-//
-
-
-//
-// Two seperate operations
-//
-// 1. Count the number of votes for each color
-// 2. Find the max votes cast for any color
-//
-// So make them seperate functions
-//
-
 function countVotes (arr) {
   var i, result = {};
 
@@ -1427,25 +1362,6 @@ function maxVotedColor (obj) {
   return most;
 }
 
-if (false) {
-  var result;
-
-  result = countVotes(records);
-  // result = maxVotedColor(result);
-
-  console.log(result);
-
-  // or, let's get crazy
-  // console.log(maxVotedColor(countVotes(records)));
-}
-
-
-//
-// Intermediate values - invalid data
-//
-// 1. Totals could never be more than a given number; thus ignore them
-//
-
 function withinLimit (totals, min, max) {
   for (var t in totals) {
     if (totals[t] < min || totals[t] > max) {
@@ -1453,21 +1369,8 @@ function withinLimit (totals, min, max) {
     }
   }
 
-  return totals; // totally unnecessary
+  return totals;
 }
-
-if (false) {
-  result = countVotes(records);
-  // result = withinLimit(result, 0, 120);
-  // result = maxVotedColor(result);
-
-  console.log(result);
-}
-
-
-//
-//
-//
 
 function noHacker (record) {
 
@@ -1480,16 +1383,101 @@ function sumVotes (acc, item) {
   } else {
     acc[item.Color] = 1;
   }
+  // acc[item.Color] = (acc[item.Color] || 0) + 1;
 
   return acc;
 }
 
-if (false) {
-  result = records
-        // .filter(noHacker)
-        .reduce(sumVotes, {});
 
-  // result = maxVotedColor(totals);
+/// Imperative
+  //
+  // All-in-one function does it all but is very rigid and tightly coupled to implementation
+  //
 
-  console.log(result);
-}
+  if (false) {
+    var getMostest = function () {
+      var color, i, most, results = {};
+
+      for (i = 0; i < records.length; i++) {
+        if (results[records[i].Color]) {
+          results[records[i].Color]++;
+        } else {
+          results[records[i].Color] = 1;
+        }
+        // results[records[i].Color] = 1 + (results[records[i].Color] || 0);
+      }
+
+      for (color in results) {
+        if (!most || most.total < results[color]) {
+          most = {color: color, total: results[color]};
+        }
+      }
+
+      return most;
+    };
+
+    console.log(getMostest());
+  }
+
+
+//
+// Now you want add some logic like, "only between certain dates"...
+//
+// Do you create new functions with some duplicated code or add argument options?
+//
+
+
+/// A step in the right direction
+  //
+  // Two seperate operations
+  //
+  // 1. Count the number of votes for each color
+  // 2. Find the max votes cast for any color
+  //
+  // So make them seperate functions
+  //
+
+  if (false) {
+
+    var result;
+
+    result = countVotes(records);
+    // result = maxVotedColor(result);
+
+    console.log(result);
+
+    // or, let's get crazy
+    // console.log(maxVotedColor(countVotes(records)));
+  }
+
+
+/// Added flexibility
+  //
+  // Intermediate values - invalid data
+  //
+  // 1. Totals could never be more than a given number; thus ignore them
+  //
+
+  if (false) {
+    result = countVotes(records);
+    // result = withinLimit(result, 0, 120);
+    // result = maxVotedColor(result);
+
+    console.log(result);
+  }
+
+
+/// Using array methods
+  //
+  //
+  //
+
+  if (false) {
+    result = records
+          // .filter(noHacker)
+          .reduce(sumVotes, {});
+
+    // result = maxVotedColor(result);
+
+    console.log(result);
+  }
