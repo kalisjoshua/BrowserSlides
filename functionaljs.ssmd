@@ -1,10 +1,5 @@
-= Functional Javascript
+= [Functional Javascript](http://bit.ly/T7iIiw)
 == Wat?!
-_
-
-
-= Slides
-== [http://bit.ly/T7iIiw](http://bit.ly/T7iIiw)
 _
 
 
@@ -13,6 +8,7 @@ _
 * Why functional?
 * Functional Programming Concepts in JavaScript
 * Functional Code Refactoring Examples
+* Questions
 _
 
 
@@ -46,8 +42,8 @@ _
 
 === Why functional?
 * Greater Confidence - testable code promotes reliable re-writing.
-* Fewer Bugs - testable code is code that can be objectively ensured to have fewer bugs.
-* More Laziness - modular code can be used many places without modification.
+* Fewer Bugs - testable code can be objectively ensured to have fewer bugs.
+* More Laziness - modular code can be reused without modification.
 _
 
 
@@ -60,20 +56,17 @@ _
 * The 'arguments' object inside function calls
 * Automatic semi-colon insertion
 * The difference in function statements and expressions
-* I rarely use these
-** eval
-** with
-** continue
-** Typed wrappers: new Boolean(true), new Number(9), new Array(), etc.
-** new (necessary at times but abstracted away from users)
-** void
+* Misunderstood misused constructs: eval, with, continue, void
+* Typed wrappers: new Boolean(true), new Number(9), new Array(), etc.
+* new (necessary at times but...)
 * Unused reserved words
 * Unicode
 * The typeof operator is in accurate
-* Floating point numbers: 0.1 + 0.2 !== 0.3
-* The plus (+) operator doing double duty as addition and concatenation
+* Floating point numbers: 0.1 + 0.2 !== 0.3 // true
+* The plus (+) operator for [addition concatenation infix]
 * Hoisting
 * NaN... Nyan cat?
+* and (many) more... :(
 _
 
 
@@ -483,17 +476,18 @@ We can gain some of the benefits that Functional offers us by just working in th
 _
 
 
-=== Point Free
-_
-
-
-= Example Time!
-upvotes by  the ninja turtles
+=== Example Time!
+upvotes by the ninja turtles
 _
 
 
 = #FunctionalJS
 == Go, now, and be functional
+_
+
+
+=== Further Learning
+* Point Free
 _
 
 
