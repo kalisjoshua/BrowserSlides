@@ -379,7 +379,8 @@
               });
 
           theme
-              .html(([]).join.call(slides.first().children().slice(0,2).map(function (i, n) {return n.innerHTML.match(/\b\w/g);}), ""))
+              // .html(([]).join.call(slides.first().children().slice(0,2).map(function (i, n) {return n.innerHTML.match(/\b\w/g);}), ""))
+              .html(slides.first().text().split(/\n/).slice(1, -2).join(" ").match(/\b\w/g).join(""))
               .appendTo(slides);
 
 
