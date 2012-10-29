@@ -40,6 +40,12 @@ _
 _
 
 
+=== Fair Warning
+Functional Programming might infect your brain and change the way that you think about problems. You might find yourself re-evaluating old code and saying something similar to:
+    "The small experience I've had with #Haskell is already changing the way I write #JavaScript, mostly regarding avoiding side effects." ~~ [@tlhunter](https://twitter.com/tlhunter/status/262648059442376704 )
+_
+
+
 === Why functional?
 * Greater Confidence - testable code promotes reliable re-writing.
 * Fewer Bugs - testable code can be objectively ensured to have fewer bugs.
