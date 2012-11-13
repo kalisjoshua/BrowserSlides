@@ -35,7 +35,7 @@ _
 
 === What am I trying to accomplish?
 * Concepts of functional programming
-* How to write Funtional Javascript
+* How to write Functional Javascript
 * Teach myself - basically I don't care about any of you
 _
 
@@ -482,8 +482,7 @@ We can gain some of the benefits that Functional offers us by just working in th
 _
 
 
-=== Example Time!
-upvotes by the ninja turtles
+= Example Time!
 _
 
 
@@ -494,6 +493,7 @@ _
 
 === Further Learning
 * Point Free
+* Monads
 _
 
 
