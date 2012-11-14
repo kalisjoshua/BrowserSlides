@@ -3,13 +3,34 @@
 _
 
 
-=== Agenda
-* Introduce Myself
-* Why functional?
-* Functional Programming Concepts in JavaScript
-* Functional Code Refactoring Examples
-* Questions
+=== Why Functional?
+* Greater Confidence - testable code promotes reliable re-writing.
+* Fewer Bugs - testable code can be objectively ensured to have fewer bugs.
+* Increased Productivity - safe, stable code can live on and you can move onto other things.
+* Easier Comprehension - shorter, more focused code is easier to grasp quicker.
+* More Laziness - modular code can be reused without modification.
+We want to write better code. We hate fixing things we thought were already working properly. We appreciate certainty when editing code we haven't had experience with or haven't touched in a long time.
 _
+
+
+= What does it all mean?
+== Now that I have you hooked...
+_
+
+
+=== Agenda
+# Introduction
+#* Why Javascript?
+#* Programming Paradigms
+# Functional Programming Concepts
+#* Functional Javascript snippets
+# Code Refactoring Examples
+# Questions
+_
+
+<!--
+* Teach myself - basically I don't care about any of you
+_-->
 
 
 ==+ Me
@@ -28,33 +49,13 @@ All self-taught mostly.
 _
 
 
-= Joshua Kalis
-== I love Javascript! So I might be biased.
+= Hi, my name is Josh.
+== I <3 Javascript. I might be biased.
 _
 
 
-=== What am I trying to accomplish?
-* Concepts of functional programming
-* How to write Functional Javascript
-* Teach myself - basically I don't care about any of you
-_
-
-
-=== Fair Warning
-Functional Programming might infect your brain and change the way that you think about problems. You might find yourself re-evaluating old code and saying something similar to:
-    "The small experience I've had with #Haskell is already changing the way I write #JavaScript, mostly regarding avoiding side effects." ~~ [@tlhunter](https://twitter.com/tlhunter/status/262648059442376704 )
-_
-
-
-=== Why functional?
-* Greater Confidence - testable code promotes reliable re-writing.
-* Fewer Bugs - testable code can be objectively ensured to have fewer bugs.
-* More Laziness - modular code can be reused without modification.
-_
-
-
-=== What are the bad parts of Javascript?
-* Variables is free to be overwritten at any time
+=== Javascript has a LOT of BAD parts!
+* Variables are free to be overwritten at any time
 * Type coercion within equality checks are unreliable
 * The 'this' value can be tricky for n00bs (as well as everyone else from time to time)
 * Blocks are optional for control structures
@@ -92,10 +93,13 @@ _
 _
 
 
-==+ Programming Paradigms
+==+ [Main Programming Paradigms](http://people.cs.aau.dk/~normark/prog3-03/html/notes/paradigms_themes-paradigm-overview-section.html)
 * Imperative, Procedural, or Structured - 1954 FORTRAN
+** "First do this and next do that"
 * Object Oriented - 1960s Simula 67
+** "Send messages between objects to simulate the temporal evolution of a set of real world phenomena"
 * Functional - 1960s LISP
+** "Evaluate an expression and use the resulting value for something"
 * Others? - [yes, there are lots](http://en.wikipedia.org/wiki/Programming_paradigm#Programming_paradigms)
 _
 
@@ -110,7 +114,7 @@ alert(message + name);
 # Set some variables
 # Ask the user for their name and store that to a variable
 # Finally we greet them with a message including their name.
-Do we see the 'Proceedure' here?
+Do we see the 'Procedure' here?
     "... describes computation in terms of statements that change a program state." ~~ [wikipedia](http://en.wikipedia.org/wiki/Imperative_programming)
 _
 
@@ -138,58 +142,33 @@ _
 
 
 === I write non-functional Javascript
----
-function validate (form) {
-    email = /\bvalidate-[^e,\s]*e[^e,\s]*\b/;
-    date = /\bvalidate-[^d,\s]*d\d[^d,\s]*\b/;
-    for (var i = 0; i < form.length; i++) {
-        if (valid) {
-            emailField = email.test(node.className) && trim(node.value) != "";
-            dateField = date.test(node.className) && trim(node.value) != "";
-            if (emailField) {/* do more conditionals and state changing */}
-            if (dateField)  {/* do more conditionals and state changing */}
-        }
-    }
-}
----
 Just to set you at ease, I am not a functional Javascript doyen writing everything in a functional manner. Actually, from time to time, I even write Javascript that doesn't even function.
 ---
 function myAwesomeness (arg) {
-    // do the most awesome thing to arg, fully unit tested, purely functional
+    // do the most awesome thing to arg
+    // fully unit tested
+    // purely functional
+    // return some computed value
 }
-...
-myAwesomeness(); // derp derp
+// ...
+var myVar = myAwesomeness(); // derp derp
 ---
 _
 
 
-= SO?!
-== None of that really lends itself to functional.
+=== Fair Warning
+Functional Programming might infect your brain and change the way that you think about problems. You might find yourself re-evaluating old code and saying something similar to:
+    "The small experience I've had with #Haskell is already changing the way I write #JavaScript, mostly regarding avoiding side effects." ~~ [@tlhunter](https://twitter.com/tlhunter/status/262648059442376704 )
 _
 
 
-<!-- 
-    misc
-        2 types of side effects
-        the UNIX philosophy
-            do one thing
-            work together - composition
-    Why is functional programming a good thing? What benefits can be gained?
-        laziness - write once, use over and over everywhere
-        test-ability leads to confidence in the execution
-        reduced function length and complexity
-    Traditionally in OOP functions (methods) must be a part of an object
-        lambda expressions
- -->
-
-
 ==+ What is Functional?
-    'In computer science, functional programming is a programming paradigm that treats computation as the evaluation of mathematical functions and avoids state and mutable data. It emphasizes the application of functions, in contrast to the imperative programming style, which emphasizes changes in state. Functional programming has its roots in lambda calculus, a formal system developed in the 1930s to investigate function definition, function application, and recursion. Many functional programming languages can be viewed as elaborations on the lambda calculus.' ~~ [wikipedia](http://en.wikipedia.org/wiki/Functional_programming)
+    "In computer science, functional programming is a programming paradigm that treats computation as the evaluation of mathematical functions and avoids state and mutable data. It emphasizes the application of functions, in contrast to the imperative programming style, which emphasizes changes in state. Functional programming has its roots in lambda calculus, a formal system developed in the 1930s to investigate function definition, function application, and recursion. Many functional programming languages can be viewed as elaborations on the lambda calculus." ~~ [wikipedia](http://en.wikipedia.org/wiki/Functional_programming)
 _
 
 
 = That's Boring!
-== Much like the design of this presentation...
+== Definitions don't always do justice to the term.
 _
 
 
@@ -231,8 +210,10 @@ function addToSum (a) {
 }
 addToSum(1); // returns 1
 addToSum(2); // returns 3
+sum = 0;
+addToSum(3); // returns 3 -> WTF!
 ---
-Now this code is reliant on a lot of things happening as intended such as no one changing total directly. It is also less reliably testable.
+Now this code is reliant on a lot of things happening as intended such as no one changing sum directly. It is also less reliably testable.
 _
 
 
@@ -251,34 +232,8 @@ var add = function add (a, b) {
 }
 ---
 The only difference being when they are initialized in the Javascript interpreter. The end result is the same; a function identified as 'add'.
-    'Function Expressions and Functional Programming are inseparable.' ~~ [JavaScript JavaScript](http://javascriptweblog.wordpress.com/2010/07/06/function-declarations-vs-function-expressions/)
+    "Function Expressions and Functional Programming are inseparable." ~~ [JavaScript JavaScript](http://javascriptweblog.wordpress.com/2010/07/06/function-declarations-vs-function-expressions/)
 _
-
-
-<!--
-=== Functions as values (cont.)
-Now, this:
----
-var add = function (a, b) {
-    return a + b;
-}
----
-... should look very similar to:
----
-var myNumber = 9;
----
-... and this should make perfect sense:
----
-var add = function (a, b) {
-    return a + b;
-}
-var compute = function (fn, value) {
-    return fn(value, value);
-}
-compute(add, 9); // returns 18
----
-_
--->
 
 
 === Higher Order Functions
@@ -379,6 +334,8 @@ program execution drills down through scopes
 |-------------------|
 |        ...        |
 |-------------------|
+|  Binding Context  | &larr; functions can have a binding context
+|-------------------|
 | Execution Context | &larr; myObj.get has privileged access to hidden
 +-------------------+
           &uarr;
@@ -438,7 +395,7 @@ _
 
 
 === Lazy evaluation
-Known as Generators, Sequences, or Streams ([StreamJS](http://streamjs.org/)), these constructs only return values on-demand. Collections of infinite length are actually workable without enormous processing power.
+Known as Generators, Sequences, or Streams ([StreamJS](http://streamjs.org/)), these constructs only return values on-demand. Collections of infinite length are actually workable without enormous processing power or infinite system memory.
 ---
 var jsArray = [1,2,3,4,5,6,7,8,9/*...*/];
 var simple = Stream.range();
@@ -478,7 +435,10 @@ _
 
     "Programming in a functional style can also be accomplished in languages that aren't specifically designed for functional programming." ~~ [wikipedia](http://en.wikipedia.org/wiki/Functional_programming)
 
-We can gain some of the benefits that Functional offers us by just working in that way - don't rely on side affects.
+We can gain some of the benefits that Functional offers us by just working in that way.
+* don't rely on side affects
+* prefer composition over inheritance
+* pick something you liked and try it out
 _
 
 
@@ -508,6 +468,7 @@ _
 # [Continuation-Passing Style](http://marijnhaverbeke.nl/cps/)
 # [lz](https://github.com/goatslacker/lz)
 # [http://idea-log.blogspot.com/](http://idea-log.blogspot.com/2005/10/why-are-continuations-so-confusing-and.html)
+# [Overview of the four main programming paradigms](http://people.cs.aau.dk/~normark/prog3-03/html/notes/paradigms_themes-paradigm-overview-section.html)
 _
 
 
