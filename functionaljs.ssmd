@@ -175,13 +175,15 @@ _
 === What does functional mean?
 Here are the topics I found to be most talked about within the FP research that I performed for this talk.
 * Purity
-* Functions as values
-* Higher order functions
-* Closure - lexical scoping
-* Curry-ing - partial application
+* Functions as Values
+* Higher Order Functions
+* Closure
+* Currying
+* Partial Application
 * Composition
-* Lazy evaluation
+* Lazy Evaluation
 * Continuations
+* Continuation Passing Style (CPS)
 _
 
 
@@ -277,7 +279,7 @@ _
 
 
 === IIFE - Immediately Invoked Function Expression
-    "Formerly referred to as Self Invoking Anonymous Functions (SIAF)." ~~ .
+And now for a little Algebraic Substitution.
 Simple math: 1 + (2 + 3) + 4 = 10
 Reduces to: 1 + 5 + 4 = 10
 ---
@@ -298,8 +300,8 @@ add(1, 2); // returns 3 every time
 _
 
 
-=== Closure - lexical scoping
-* Objects retain access to the context (scope) in which they were created
+=== Closure (lexical scoping)
+Objects retain access to the context (scope) in which they were created
 ---
 var formatter = function (str) {
     return 'Want to know a secret? ' + str;
@@ -322,6 +324,7 @@ _
 
 
 === Scope Chain
+Let's take a little side step for a second.
 +++
 program execution drills down through scopes
           &darr;
@@ -344,7 +347,27 @@ variable resolution looks up the scope chain until hitting global
 _
 
 
-=== Curry-ing - partial application
+=== Currying
+    "...transforming a function that takes n multiple arguments [into] a chain of functions, each with a single argument..." ~~ [wikipedia](http://en.wikipedia.org/wiki/Currying)
+This might take some explanation to fully grasp; it did for me anyway.
+---
+function sumOfSix (a, b, c, d, e, f) {
+    return a + b + c + d + e + f;
+}
+// ...
+sumOfSix(1, 2, 3); // some argument values will be undefined
+// ...
+                   // curry is a fictitious function here
+var sumOfSixCurried = curry(sumOfSix);
+sumOfSixCurried(1);       // returns a new function expecting one argument
+sumOfSixCurried(1)(2);    // returns a new function expecting one argument
+sumOfSixCurried(1)(2)(3); // returns a new function expecting one argument
+sumOfSixCurried(1)(2)(3)(4)(5)(6); // returns 21
+---
+_
+
+
+=== Partial Application
 Reducing the number of arguments by applying others previously.
 ---
 function add (a, b) {
