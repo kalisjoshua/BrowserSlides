@@ -53,7 +53,6 @@
         #help a {
             color: inherit;
             }
-
     div > div {
         border-top: 10px solid;
         font-size: 150%;
@@ -119,8 +118,26 @@
             position: relative;
             }
             div > div pre code {
+                counter-reset: linenumbers;
                 display: block;
                 padding: .75em 80px;
+                }
+            div > div pre code > span:before {
+                background: rgba(255,255,255,0.05);
+                border-right: 1px solid #BBB5B2;
+                color: #BBB5B2;
+                content: counter(linenumbers);
+                counter-increment: linenumbers;
+                font-size: .85em;
+                left: -80px;
+                padding-right: .5em;
+                position: absolute;
+                text-align: right;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                width: 2.5em;
+                z-index: 1000;
                 }
             div > div pre pre {
                 background: gainsboro;
@@ -178,11 +195,13 @@
       "use strict";
 
       var nl = "\n"
-        , types = {"#":"ol","*":"ul"};
+        , types = {"#":"ol","*":"ul"}
+        , _span = tagify.bind(null, "span");
 
       function highlight(js) {
           return js
-              .replace(/(?:^|\s+)(?:\/\/[^$]*?$)|(?:\/\*[.\D]*?\*\/)/gm, '<span class="comment">$&</span>')
+              .replace(/(^|\s)(\s*\/\/[^$]*?)(?=\n|$)/g, '$1<span class="comment">$2</span>')
+              .replace(/(\/\*[.\D]*?\*\/)/g, '<span class="comment">$1</span>')
               .replace(/('.*?')/gm, '<span class="string">$1</span>')
               .replace(/\s+(\/.+\/)([\.\s;])/g, '<span class="string">$1</span>$2')
               .replace(/((?=[\-+])(?:[\-+]?\d+(?:\.\d+)?)|(?:\b\d+(?:\.\d+)?))/gm, '<span class="number">$1</span>')
@@ -196,8 +215,9 @@
       }
 
       function tagify (tag, content, attr) {
+          attr = (attr && attr.toString() === attr.valueOf()) ? attr : "";
           return "<%1%3>%2</%1>"
-              .replace(/%3/, attr || "")
+              .replace(/%3/, attr)
               .replace(/%1/g, tag)
               .replace(/%2/, content);
       }
@@ -215,7 +235,8 @@
 
               // code blocks
               .replace(/(^-{3})\n+([^\1]*?)\n+\1/gm, function (match, garbage, code) {
-                  return tagify("pre", tagify("code", highlight(code).split(nl).join("~br~")));
+                  return tagify("pre", tagify("code", code.split(nl).map(highlight).map(_span).join("~br~")));
+                  // return tagify("pre", tagify("code", highlight(code).split(nl).map(_span).join("~br~")));
               })
 
               // blockquote
