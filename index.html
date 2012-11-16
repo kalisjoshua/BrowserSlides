@@ -300,6 +300,9 @@
                   return (/^</).test(content) ? content : tagify("p", content);
               })
 
+              // strong elements
+              .replace(/\^([^^]+?)\^/g, "<strong>$1</strong>")
+
               .replace(/~br~/gm, "\n")
 
               // links
