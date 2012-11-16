@@ -3,18 +3,31 @@
 _
 
 
-=== Why Functional?
-* Greater Confidence - testable code promotes reliable re-writing.
-* Fewer Bugs - testable code can be objectively ensured to have fewer bugs.
-* Increased Productivity - safe, stable code can live on and you can move onto other things.
-* Easier Comprehension - shorter, more focused code is easier to grasp quicker.
-* More Laziness - modular code can be reused without modification.
-We want to write better code. We hate fixing things we thought were already working properly. We appreciate certainty when editing code we haven't had experience with or haven't touched in a long time.
+= Why Functional?
 _
 
 
-= What does it all mean?
-== Now that I have you hooked...
+=== Write Better Code
+^Greater Confidence^
+Testable code promotes reliable re-writing and can be objectively ensured to have fewer bugs. Who wants to fix code that was thought to already be fixed?
+^Increased Productivity^
+Safe, stable code can be relied on and you can move onto other things.
+^Easier Comprehension^
+Shorter, more focused, code is easier to grasp for yourself and other developers.
+_
+
+
+= SO!
+== What does it all mean?
+_
+
+
+= Moar Laziness!
+_
+
+
+= Hooked?
+== Good, now some boring stuff.
 _
 
 
@@ -93,7 +106,7 @@ _
 _
 
 
-==+ [Main Programming Paradigms](http://people.cs.aau.dk/~normark/prog3-03/html/notes/paradigms_themes-paradigm-overview-section.html)
+==+ Main Programming Paradigms ([source](http://people.cs.aau.dk/~normark/prog3-03/html/notes/paradigms_themes-paradigm-overview-section.html))
 * Imperative, Procedural, or Structured - 1954 FORTRAN
 ** "First do this and next do that"
 * Object Oriented - 1960s Simula 67
@@ -140,12 +153,12 @@ Here we gain some re-usability, albeit with some verbosity.
 # Greet the user with a message including their name.
 _
 
-
+<!--
 === I write non-functional Javascript
 Just to set you at ease, I am not a functional Javascript doyen writing everything in a functional manner. Actually, from time to time, I even write Javascript that doesn't even function.
 ---
 function myAwesomeness (arg) {
-    // do the most awesome thing to arg
+    // perform some intense computation on arg
     // fully unit tested
     // purely functional
     // return some computed value
@@ -154,6 +167,7 @@ function myAwesomeness (arg) {
 var myVar = myAwesomeness(); // derp derp
 ---
 _
+-->
 
 
 === Fair Warning
@@ -168,7 +182,7 @@ _
 
 
 = That's Boring!
-== Definitions don't always do justice to the term.
+== And what...?
 _
 
 
@@ -187,21 +201,6 @@ Here are the topics I found to be most talked about within the FP research that 
 _
 
 
-=== Purity
-* Referential transparency - for a (input) value x there is a (output) value y
-* Treats computation as the evaluation of mathematical functions
-* AVOIDS state and mutable data; doesn't necessarily eliminate it
----
-function sum (a, b) {
-    return a + b;
-}
-// ...
-sum(1, 2); // returns 3, every time.
----
-This is referentially transparent, meaning it can be logically reasoned about and the input dictates the output. Testing this will be straight-forward and reliable.
-_
-
-
 === Impurity
 Relying on side effects leads to problems and brain-ache.
 ---
@@ -216,6 +215,21 @@ sum = 0;
 addToSum(3); // returns 3 -> WTF!
 ---
 Now this code is reliant on a lot of things happening as intended such as no one changing sum directly. It is also less reliably testable.
+_
+
+
+=== Purity
+* Referential transparency - for a (input) value x there is a (output) value y
+* Treats computation as the evaluation of mathematical functions
+* AVOIDS state and mutable data; doesn't necessarily eliminate it
+---
+function sum (a, b) {
+    return a + b;
+}
+// ...
+sum(1, 2); // returns 3, every time.
+---
+This is referentially transparent, meaning it can be logically reasoned about and the input dictates the output. Testing this will be straight-forward and reliable.
 _
 
 
@@ -254,13 +268,13 @@ _
 
 
 === Higher Order Functions (cont.)
-Examples: bind, 'factories', others...
-==== Functions as returned values
+Examples: ajax, bind, event handlers, array functions, 'factories', others...
+^Functions as returned values^
 ---
 // add factory
-function makeAdder (preValue) {
+function makeAdder (baseValue) {
     return function (x) {
-        return preValue + x;
+        return baseValue + x;
     };
 }
 var add5 = makeAdder(5);
@@ -279,23 +293,18 @@ _
 
 
 === IIFE - Immediately Invoked Function Expression
-And now for a little Algebraic Substitution.
-Simple math: 1 + (2 + 3) + 4 = 10
-Reduces to: 1 + 5 + 4 = 10
+And now for a little (Algebraic) Substitution. The two equations below are equal.
+* 3 * (1 + 2) = 9
+* 3 * (3) = 9
 ---
 var add = function (a, b) {return a + b;};
 add(1, 2); // returns 3 every time
 
 // Baby step, remember from math class, parens are just grouping
-(add)(1, 2); // still returns 3 every time
+(add)(1, 2); // returns 3 every time
 
-// A slightly bigger step
-(function (a, b) {return a + b;})(1, 2); // still returning 3 every time
-
-// Just different formatting
-(function (a, b) {
-    return a + b;
-})(1, 2); // returns 3 every time
+// Here is the IIFE
+(function (a, b) {return a + b;})(1, 2); // returns 3 every time
 ---
 _
 
@@ -303,22 +312,23 @@ _
 === Closure (lexical scoping)
 Objects retain access to the context (scope) in which they were created
 ---
-var formatter = function (str) {
-    return 'Want to know a secret? ' + str;
-}
-var myObj = (function (fn) {
-    var hidden = 'I have a secret.'
-    var innerObj = {
-        get: function () { return fn(hidden); }
-        ,set: function (newValue) { hidden = newValue; }
-    };
-    return innerObj;
-}(formatter));
+var outterObj = (function () {
+    var hidden = 'I have a secret.';
 
-myObj.get();  // returns 'Want to know a secret? I have a secret.'
-myObj.set('Javascript is awesome!');
-myObj.get();  // returns 'Want to know a secret? Javascript is awesome!'
-myObj.hidden; // undefined
+    return {
+        get: function () {
+            return hidden;
+        }
+        , set: function (newValue) {
+            hidden = newValue;
+        }
+    };
+}());
+
+outterObj.get();  // returns 'I have a secret.'
+outterObj.set('Javascript is awesome!');
+outterObj.get();  // returns 'Javascript is awesome!'
+outterObj.hidden; // undefined
 ---
 _
 
@@ -374,11 +384,12 @@ function add (a, b) {
     return a + b;
 }
 var add5 = add.bind(null, 5);
+add5(10); // returns 15
+add5(-4); // returns 1
 ---
-The bind method of the Function object allows us to do two things:
-# Explicitly set the context a function will execute with; value of 'this' inside the function
-# Predetermine arguments that will be passed in
----
+The bind method of the Function object allows us to do two things: explicitly set the context a function will execute with; value of 'this' inside the function, and supply arguments that will be available in the function body.
+[Partial Application in JavaScript by Ben Alman](http://benalman.com/news/2012/09/partial-application-in-javascript/)
+<!---
 // !WARNING! unsafe for actual use
 function partial (fn) {
     var args = [].slice.call(arguments, 1);     // get all arguments after the first
@@ -386,10 +397,7 @@ function partial (fn) {
         fn.apply(null, args.concat(arguments)); // add args to partially applied args
     }
 }
-var add5 = partial(add, 5);
-add5(10); // returns 15
-add5(-4); // returns 1
----
+--->
 _
 
 
@@ -420,10 +428,14 @@ _
 === Lazy evaluation
 Known as Generators, Sequences, or Streams ([StreamJS](http://streamjs.org/)), these constructs only return values on-demand. Collections of infinite length are actually workable without enormous processing power or infinite system memory.
 ---
-var jsArray = [1,2,3,4,5,6,7,8,9/*...*/];
-var simple = Stream.range();
-
-jsArray.length;  // returns, however many were added to this point
+// native Javascript array (not lazy)
+var jsArray = [1,2,3,4,5,6,7,8,9];
+jsArray.length;  // returns 9
+---
+Lazy evaluated structures will work quite a bit differently.
+---
+// using Stream.js library
+var simple = Stream.range(); // create a stream of natural numbers [1,2,3...&infin;]
 simple.length(); // returns... umm, infinitely loops as it attempts to find the end
 
 simple.take(10).length(); // returns 10
@@ -442,26 +454,25 @@ _
 
 
 === Continuation-Passing Style (CPS)
-Commonly known as callbacks in the Javascript community.
+Commonly used as callbacks in Javascript land.
 ---
-magicAJAX({
-    data: JSON.stringify({name: 'Joshua', rank: 'AWESOME', serial_number: 1})
-    ,fail: function (err, data) {/* fail gracefully with a curtsy :)~ */}
-    ,success: function (data)   {/* do stuff with the retrieved data */}
-    ,url: 'http://some_domain.tld/folder/file.ext'
-});
+doAJAX(
+    'http://url.to.api'
+  , JSON.stringify({name: 'Joshua'})
+  , function succesHandler (data) {/*do cool stuff*/}
+  , function failHandler  (error) {/*do cool stuff*/});
 ---
 Possible stack overflow problems for deeply nested calls due to no tail optimization.
-    "No procedure is allowed to return to its caller--ever... Procedures can take a callback to invoke upon their return value." ~~ [By example: Continuation-passing style in JavaScript](http://matt.might.net/articles/by-example-continuation-passing-style/)
+    "No procedure is allowed to return to its caller ever..." ~~ [By example: Continuation-passing style in JavaScript](http://matt.might.net/articles/by-example-continuation-passing-style/)
 _
 
 
-    "Programming in a functional style can also be accomplished in languages that aren't specifically designed for functional programming." ~~ [wikipedia](http://en.wikipedia.org/wiki/Functional_programming)
-
+=== Functional Elsewhere?
 We can gain some of the benefits that Functional offers us by just working in that way.
-* don't rely on side affects
-* prefer composition over inheritance
-* pick something you liked and try it out
+    "Programming in a functional style can also be accomplished in languages that aren't specifically designed for functional programming." ~~ [wikipedia](http://en.wikipedia.org/wiki/Functional_programming)
+* Avoid reliance on state transformations
+* Write functions side affect free
+* Prefer composition over inheritance
 _
 
 
