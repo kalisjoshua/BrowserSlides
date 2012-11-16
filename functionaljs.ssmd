@@ -334,7 +334,7 @@ _
 
 
 === Scope Chain
-Let's take a little side step for a second.
+Let's take a little side step for a second. Behold the ASCII diagram.
 +++
 program execution drills down through scopes
           &darr;
