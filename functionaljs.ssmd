@@ -1,5 +1,10 @@
-= [Functional Javascript](http://bit.ly/T7iIiw)
+= Functional Javascript
 == Wat?!
+_
+
+
+= Slides
+== [http://bit.ly/T7iIiw](http://bit.ly/T7iIiw)
 _
 
 
@@ -9,11 +14,11 @@ _
 
 === Write Better Code
 ^Greater Confidence^
-Testable code promotes reliable re-writing and can be objectively ensured to have fewer bugs. Who wants to fix code that was thought to already be fixed?
+Testable code promotes reliable re-writing and can be objectively ensured to have fewer bugs. Who wants to fix code that was thought to already have been fixed?
 ^Increased Productivity^
-Safe, stable code can be relied on and you can move onto other things.
+Safe, stable code can be relied on and you can move onto other, more important or interesting, projects. Composing preexisting code will reduce new code and require fewer tests.
 ^Easier Comprehension^
-Shorter, more focused, code is easier to grasp for yourself and other developers.
+Shorter, more focused, code is easier to grasp for yourself and other developers. Fewer lines of code means fewer chances for things to go wrong.
 _
 
 
@@ -102,16 +107,19 @@ _
 ** Employable skill
 * Multi-paradigm
 ** Write however you want
-* and more (probably) but lets move on
+... and more (probably) but lets move on
 _
 
 
 ==+ Main Programming Paradigms ([source](http://people.cs.aau.dk/~normark/prog3-03/html/notes/paradigms_themes-paradigm-overview-section.html))
-* Imperative, Procedural, or Structured - 1954 FORTRAN
+* Imperative, Procedural, or Structured
+** 1954 FORTRAN
 ** "First do this and next do that"
-* Object Oriented - 1960s Simula 67
+* Object Oriented
+** 1960s Simula 67
 ** "Send messages between objects to simulate the temporal evolution of a set of real world phenomena"
-* Functional - 1960s LISP
+* Functional
+** 1960s LISP
 ** "Evaluate an expression and use the resulting value for something"
 * Others? - [yes, there are lots](http://en.wikipedia.org/wiki/Programming_paradigm#Programming_paradigms)
 _
@@ -124,9 +132,9 @@ var promptMessage = 'What is your name?';
 var name = prompt(promptMessage);
 alert(message + name);
 ---
-# Set some variables
-# Ask the user for their name and store that to a variable
-# Finally we greet them with a message including their name.
+# Set some variables.
+# Ask the user for their name and store that to a variable.
+# Finally, greet them with a message including their name.
 Do we see the 'Procedure' here?
     "... describes computation in terms of statements that change a program state." ~~ [wikipedia](http://en.wikipedia.org/wiki/Imperative_programming)
 _
@@ -134,16 +142,15 @@ _
 
 === Object Oriented
 ---
-function Greeting (name) {                     // class instance initialization
-    this.name = name;
+function Greeting () {
+    this.name = prompt(Greeting.promptMessage);
 }
 Greeting.promptMessage = 'What is your name?'; // static(-like) property
 Greeting.prototype.say = function (message) {  // inherited function
     alert(message + this.name);
 }
-var name = prompt(Greeting.promptMessage);
-var user = new Greeting(name);
-user.say('Hello ');
+var personalGreeting = new Greeting();
+personalGreeting.say('Hello ');
 ---
 Here we gain some re-usability, albeit with some verbosity.
 # Define a 'class'; see the quotes, because Javascript doesn't truly have classes.
@@ -168,6 +175,14 @@ var myVar = myAwesomeness(); // derp derp
 ---
 _
 -->
+
+
+=== One Big Difference
+^Imperative and Object Oriented^
+Focus is on 'how' to accomplish the desired outcome.
+^Functional^
+Focus is on 'what' to do to accomplish the desired outcome.
+_
 
 
 === Fair Warning
@@ -214,14 +229,14 @@ addToSum(2); // returns 3
 sum = 0;
 addToSum(3); // returns 3 -> WTF!
 ---
-Now this code is reliant on a lot of things happening as intended such as no one changing sum directly. It is also less reliably testable.
+This code is reliant on no other programmers changing the value of sum (intentionally or otherwise); it is also not testable over the life of execution because of that.
 _
 
 
 === Purity
-* Referential transparency - for a (input) value x there is a (output) value y
-* Treats computation as the evaluation of mathematical functions
-* AVOIDS state and mutable data; doesn't necessarily eliminate it
+* Referential transparency
+* Computation is the evaluation of mathematical functions
+* One input set will yield the same output every time
 ---
 function sum (a, b) {
     return a + b;
@@ -234,7 +249,7 @@ _
 
 
 === Functions as values
-* A function is a 'value' (object or thing) that can be assigned to an 'identifier' (or variable)
+A function is a 'value' that can be assigned to an 'identifier'.
 This declaration:
 ---
 function add (a, b) {
@@ -243,7 +258,7 @@ function add (a, b) {
 ---
 ... is very similar to this expression:
 ---
-var add = function add (a, b) {
+var add = function (a, b) {
     return a + b;
 }
 ---
@@ -255,20 +270,19 @@ _
 === Higher Order Functions
 * Takes a function as an argument (or)
 * Returns a function as a result
-Examples: map, filter, forEach/each, some, every, click, focus, load, keydown, ... etc.
+Examples: Array mutators, Event Handlers, etc.
 ==== Functions as arguments
 ---
-$('a#clicker')
-    .on('click', function (event) {
-        event.preventDefault();
-        alert('oh yeah!');
+[1, 2, 3, 4, 5, 6]
+    .map(function (num) {
+        return num * 3.14159;
     });
 ---
 _
 
 
 === Higher Order Functions (cont.)
-Examples: ajax, bind, event handlers, array functions, 'factories', others...
+Examples: bind, 'factories', etc.
 ^Functions as returned values^
 ---
 // add factory
@@ -310,11 +324,13 @@ _
 
 
 === Closure (lexical scoping)
-Objects retain access to the context (scope) in which they were created
+Objects retain access to the context (scope) in which they were created.
 ---
 var outterObj = (function () {
     var hidden = 'I have a secret.';
 
+    // return this object to outterObj
+    // privileged methods inside have access to 'hidden' through closure
     return {
         get: function () {
             return hidden;
@@ -336,23 +352,24 @@ _
 === Scope Chain
 Let's take a little side step for a second. Behold the ASCII diagram.
 +++
-program execution drills down through scopes
+program execution drills down through scopes building a scope chain
           &darr;
 +-------------------+
-|    Global Scope   |
+|    Global Scope   | &larr; default location for variables
 |-------------------|
-| Namespace Context | &larr; single global namespace object (omitted)
+| Namespace Context | &larr; single global namespace object
 |-------------------|
-|    IIFE Context   | &larr; innerObj is assigned to myObject through closure
+|    IIFE Context   | &larr; variables instantiated with 'var' inside
 |-------------------|
 |        ...        |
 |-------------------|
 |  Binding Context  | &larr; functions can have a binding context
 |-------------------|
-| Execution Context | &larr; myObj.get has privileged access to hidden
+| Execution Context | &larr; argument values and closure variables
 +-------------------+
           &uarr;
-variable resolution looks up the scope chain until hitting global
+variable resolution looks up the scope chain
+finding the reference or hitting global and returning undefined
 +++
 _
 
@@ -378,7 +395,7 @@ _
 
 
 === Partial Application
-Reducing the number of arguments by applying others previously.
+Reducing the number of needed arguments by supplying values ahead of time.
 ---
 function add (a, b) {
     return a + b;
@@ -387,7 +404,7 @@ var add5 = add.bind(null, 5);
 add5(10); // returns 15
 add5(-4); // returns 1
 ---
-The bind method of the Function object allows us to do two things: explicitly set the context a function will execute with; value of 'this' inside the function, and supply arguments that will be available in the function body.
+The bind method on the Function prototype allows us to do two things: explicitly set the context a function will execute with - value of 'this' inside the function - and supply arguments that will be available when the function is called.
 [Partial Application in JavaScript by Ben Alman](http://benalman.com/news/2012/09/partial-application-in-javascript/)
 <!---
 // !WARNING! unsafe for actual use
