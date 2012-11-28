@@ -1,22 +1,22 @@
 <!DOCTYPE html>  
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width" />
   <title></title>
-  <link href="//fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu:300,400,700,300italic,400italic" rel="stylesheet" type="text/css" />
+  <!-- <link href="//fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu:300,400,700,300italic,400italic" rel="stylesheet" type="text/css" /> -->
   <style type="text/css">
+    #toc {
+        position: relative;
+        z-index: 999999;
+    }
+    .no-js #toc {display: none;}
     a {
         color: black;
         }
     html {
         font-family: 'Ubuntu', sans-serif;
-        }
-    @media only screen and (max-width: 60em) {
-        html {
-            font-size: .6em;
-            }
         }
     pre {
         font-family: 'Ubuntu Mono', 'Lucida Console', 'Monaco', 'Courier New', 'Courier', monospace;
@@ -101,26 +101,32 @@
         }
         div > div ol,
         div > div ul {
-            margin: .5em 0 .5em 100px;
+            margin: .5em 0;
+            margin-left: 1em;
             padding: 0;
             }
-            div > div li ol,
-            div > div li ul {
-                margin-left: 30px;
-                }
+        div > div li ol,
+        div > div li ul {
+            margin-top: 0;
+            margin-bottom: 0;
+            }
+        div > div > ol,
+        div > div > ul {
+            margin-left: 3em;
+            }
         div > div p {
-            margin: 0;
-            padding: .5em 40px;
+            margin: .5em 2em;
             }
         div > div pre {
             line-height: 2.2ex;
             margin: 0;
+            overflow: auto;
             position: relative;
             }
             div > div pre code {
                 counter-reset: linenumbers;
                 display: block;
-                padding: .75em 80px;
+                padding: .75em 3.5em;
                 }
             div > div pre code > span:before {
                 background: black;
@@ -130,7 +136,7 @@
                 content: counter(linenumbers);
                 counter-increment: linenumbers;
                 font-size: .85em;
-                left: -80px;
+                left: -4em;
                 padding-right: .5em;
                 position: absolute;
                 text-align: right;
@@ -144,7 +150,7 @@
                 }
             div > div pre pre {
                 background: gainsboro;
-                padding: .75em 80px;
+                padding: .75em 80px;    
                 }
         div > div > footer {
             border-bottom: 10px solid;
@@ -180,8 +186,62 @@
     .code-light code .comment { color: #A1ABA8; }
     */
 
+    @media only screen and (max-width: 60em) {
+        div > div blockquote {
+            padding: .5em 0;
+            }
+        div > div ol,
+        div > div ul {
+            margin-left: 1.25em;
+            }
+        div > div > ol,
+        div > div > ul {
+            margin-left: 3.75em;
+            }
+        h3, h4, h5, h6 {
+            margin-left: 0;
+            padding-left: 1em;
+            }
+        html {
+            font-size: .6em;
+            }
+    }
+    @media only screen and (max-width: 40em) {
+        div > div {
+            border: 0;
+            }
+        div > div > footer,
+        div > div kbd {
+            display: none;
+            }
+        div > div ol,
+        div > div ul {
+            margin-left: 1.5em;
+            }
+        div > div > ol,
+        div > div > ul {
+            margin-left: 3.5em;
+            }
+        div > div p {
+            margin: .5em 1.75em;
+            /*padding: .75em;*/
+            }
+        h3, h4, h5, h6 {
+            margin-left: 0;
+            padding-left: 1em;
+            }
+        html {
+            font-size: .35em;
+            }
+    }
+
   </style>
 <body>
+
+<ul id="toc">
+    <li> <a href="#functionaljs">Functional Javascript</a> </li>
+    <li> <a href="#jqueryplugins">jQuery Plugins</a> </li>
+</ul>
 
 <div id="slideshow"></div>
 
@@ -395,7 +455,7 @@
       function nav (event) {
           vector = {
               keydown: event.keyCode - 38
-            , touch: event.advance
+            , touchstart: event.advance
           }[event.type];
 
           var next = ~~hashvalue().match(/\d+/)[0] + vector;
@@ -438,24 +498,14 @@
           $(document).on("keydown", nav);
 
           if (document.addEventListener) {
-            document.addEventListener("touchstart", function (e) {
-                nav({
-                    advance: (event.pageX > document.body.offsetWidth / 2 ? 1 : -1)
-                  , type: "touch"
-                });
+            document.addEventListener("touchstart", function (event) {
+                var center = document.body.clientWidth / 2;
+                if (Math.abs(event.pageX - center) / center > 0.9) {
+                    event.advance = (event.pageX > center ? 1 : -1);
+                    nav(event);
+                }
             });
           }
-
-          $("#help a")
-              .on("click", function (event) {
-                  event.preventDefault();
-                  event.stopPropagation();
-                  $(this)
-                      .closest("p")
-                      .children("span")
-                      .remove();
-                  $(document).on("click", nav);
-              });
 
           presentation = window.location.hash.match(/[^#\-]+/)[0];
           
@@ -474,15 +524,31 @@
       };
   }(jQuery));
 
-
-  $.ajax({
-    success: function (data) {
-      "use strict";
-      $.fn.ready(function () {
-        $("div#slideshow")
-          .slideshow(ssmd(data));
+  function horribleFnName () {
+      $.ajax({
+        success: function (data) {
+          "use strict";
+          $.fn.ready(function () {
+            $("#toc")
+                .remove();
+            $("div#slideshow")
+              .slideshow(ssmd(data));
+          });
+        }
+        ,url: window.location.hash.match(/[^#\-]+/)[0] + ".ssmd"
       });
-    }
-    ,url: window.location.hash.match(/[^#\-]+/)[0] + ".ssmd"
-  });
+  }
+
+  $("html")
+    .removeClass("no-js");
+    
+  if (window.location.hash) {
+    horribleFnName();
+  } else {
+    $("#toc")
+        .on("click", function (event) {
+            window.location.href = event.target.href;
+            horribleFnName();
+        });
+  }
 </script>
