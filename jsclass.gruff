@@ -63,6 +63,9 @@
 #* jQuery
 # AJAX
 # execution context
+#* apply
+#* bind
+#* call
 # events
 #* handlers
 #* listeners
@@ -84,12 +87,11 @@
 # eval
 # with
 # Function
-# apply, bind, and call
 # critical thinking
 #* setInterval vs setTimeout
 #* object methods vs prototype methods
 # break the rules responsibly
 
-== links
+== Links
 * [[http://www.w2lessons.com/2011/04/you-dont-know-javascript.html|You Don't Know Javascript]]
 * [[http://blog.stevenlevithan.com/archives/levels-of-javascript-regex-knowledge|Levels Of JS Regex Knowledge]]
