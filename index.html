@@ -2,28 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width" />
   <title></title>
-  <!-- <link href='//fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'/> -->
-  <!-- <link rel="stylesheet" href="slideshow.css" /> -->
+  <link href="//fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu:300,400,700,300italic,400italic" rel="stylesheet" type="text/css" />
   <style type="text/css">
     a {
         color: black;
         }
-    body {
+    html {
         font-family: 'Ubuntu', sans-serif;
-        margin: 0;
-        position: relative;
-        padding: 0;
-        text-align: center;
         }
-    body > div {
-        background: white;
-        height: 50em;
-        margin: 2em auto;
-        overflow: hidden;
-        position: relative;
-        text-align: left;
-        width: 70em;
+    @media only screen and (max-width: 60em) {
+        html {
+            font-size: .6em;
+            }
+        }
+    pre {
+        font-family: 'Ubuntu Mono', 'Lucida Console', 'Monaco', 'Courier New', 'Courier', monospace;
         }
     h1,
     h2 {
@@ -41,11 +37,7 @@
     h4 { font-size: 150%; }
     h5 { font-size: 130%; }
     h6 { font-size: 100%; }
-    html {
-        background: black;
-        margin: 0;
-        padding: 0;
-        }
+
     #help {
         color: gainsboro;
         font-size: 80%;
@@ -53,13 +45,22 @@
         #help a {
             color: inherit;
             }
+
+    body > div {
+        height: 100%;
+        left: 0;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        }
     div > div {
         border-top: 10px solid;
         font-size: 150%;
         line-height: 1.4em;
         height: 100%;
         left: 100%;
-        overflow: hidden;
+        overflow: auto;
         position: absolute;
         top: 0;
         width: 100%;
@@ -112,7 +113,6 @@
             padding: .5em 40px;
             }
         div > div pre {
-            font-family: 'Ubuntu Mono', 'Lucida Console', Monaco, 'Courier New', Courier, monospace;
             line-height: 2.2ex;
             margin: 0;
             position: relative;
@@ -123,6 +123,7 @@
                 padding: .75em 80px;
                 }
             div > div pre code > span:before {
+                background: black;
                 background: rgba(255,255,255,0.05);
                 border-right: 1px solid #BBB5B2;
                 color: #BBB5B2;
@@ -136,6 +137,8 @@
                 -webkit-user-select: none;
                 -moz-user-select: none;
                 -ms-user-select: none;
+                -o-user-select: none;
+                user-select: none;
                 width: 2.5em;
                 z-index: 1000;
                 }
@@ -176,12 +179,11 @@
     .code-light code .comment *,
     .code-light code .comment { color: #A1ABA8; }
     */
-  </style>
 
+  </style>
 <body>
 
 <div id="slideshow"></div>
-<p id="help">Use left-arrow and right-arrow to navigate, or <span><a href="#">add mobile tap</a> to navigating</span> by clicking either side of the screen.</p>
 
 <script>
   /*! jQuery v@1.8.0 jquery.com | jquery.org/license */
@@ -189,6 +191,30 @@
 
   /*! jQuery hashchange event - v1.3 - 7/21/2010 | http://benalman.com/projects/jquery-hashchange-plugin */
   (function($,e,b){var c="hashchange",h=document,f,g=$.event.special,i=h.documentMode,d="on"+c in e&&(i===b||i>7);function a(j){j=j||location.href;return"#"+j.replace(/^[^#]*#?(.*)$/,"$1")}$.fn[c]=function(j){return j?this.bind(c,j):this.trigger(c)};$.fn[c].delay=50;g[c]=$.extend(g[c],{setup:function(){if(d){return false}$(f.start)},teardown:function(){if(d){return false}$(f.stop)}});f=(function(){var j={},p,m=a(),k=function(q){return q},l=k,o=k;j.start=function(){p||n()};j.stop=function(){p&&clearTimeout(p);p=b};function n(){var r=a(),q=o(m);if(r!==m){l(m=r,q);$(e).trigger(c)}else{if(q!==m){location.href=location.href.replace(/#.*/,"")+q}}p=setTimeout(n,$.fn[c].delay)}$.browser.msie&&!d&&(function(){var q,r;j.start=function(){if(!q){r=$.fn[c].src;r=r&&r+a();q=$('<iframe tabindex="-1" title="empty"/>').hide().one("load",function(){r||l(a());n()}).attr("src",r||"javascript:0").insertAfter("body")[0].contentWindow;h.onpropertychange=function(){try{if(event.propertyName==="title"){q.document.title=h.title}}catch(s){}}}};j.stop=k;o=function(){return a(q.location.href)};l=function(v,s){var u=q.document,t=$.fn[c].domain;if(v!==s){u.title=h.title;u.open();t&&u.write('<script>document.domain="'+t+'"<\/script>');u.close();q.location.hash=v}}})();return j})()})(jQuery,this);
+
+  if (!Function.prototype.bind) {
+    Function.prototype.bind = function (oThis) {
+      if (typeof this !== "function") {
+        // closest thing possible to the ECMAScript 5 internal IsCallable function
+        throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
+      }
+   
+      var aArgs = Array.prototype.slice.call(arguments, 1), 
+          fToBind = this, 
+          fNOP = function () {},
+          fBound = function () {
+            return fToBind.apply(this instanceof fNOP && oThis
+                                   ? this
+                                   : oThis,
+                                 aArgs.concat(Array.prototype.slice.call(arguments)));
+          };
+   
+      fNOP.prototype = this.prototype;
+      fBound.prototype = new fNOP();
+   
+      return fBound;
+    };
+  }
 
   // ssmd
   (function (global) {
@@ -327,7 +353,6 @@
       typeof module === 'undefined'
         ? window.ssmd = ssmd
         : module.exports = ssmd;
-
   }());
 
   // app setup
@@ -368,24 +393,21 @@
       }
 
       function nav (event) {
-          if ((/(?:click|keydown)/i).test(event.type)) {
-              vector = event.keyCode
-                  ? event.keyCode - 38
-                  : (event.pageX > Math.floor(document.width / 2))
-                      ? 1
-                      : -1;
-              var next = ~~hashvalue().match(/\d+/)[0] + vector;
+          vector = {
+              keydown: event.keyCode - 38
+            , touch: event.advance
+          }[event.type];
 
-              if (Math.abs(vector) === 1 && (next >= 0 && next < slideCount)) {
-                  event.preventDefault();
-                  hashvalue(next);
-              }
+          var next = ~~hashvalue().match(/\d+/)[0] + vector;
+
+          if (Math.abs(vector) === 1 && (next >= 0 && next < slideCount)) {
+              event.preventDefault && event.preventDefault();
+              hashvalue(next);
           }
 
           if (Math.abs(event.keyCode - 39) === 1 && (event.metaKey || event.ctrlKey)) {
-              event.preventDefault();
+              event.preventDefault && event.preventDefault();
               hashvalue({"38": 0, "40": (slideCount - 1)}[event.keyCode]);
-              // cleanup();
           }
       }
 
@@ -403,7 +425,6 @@
               });
 
           theme
-              // .html(([]).join.call(slides.first().children().slice(0,2).map(function (i, n) {return n.innerHTML.match(/\b\w/g);}), ""))
               .html(slides.first().text().split(/\n/).slice(1, -2).join(" ").match(/\b\w/g).join(""))
               .appendTo(slides);
 
@@ -415,6 +436,15 @@
       
           // setup navigation for desktop and mobile
           $(document).on("keydown", nav);
+
+          if (document.addEventListener) {
+            document.addEventListener("touchstart", function (e) {
+                nav({
+                    advance: (event.pageX > document.body.offsetWidth / 2 ? 1 : -1)
+                  , type: "touch"
+                });
+            });
+          }
 
           $("#help a")
               .on("click", function (event) {
