@@ -1,0 +1,95 @@
+= Javascript Curriculum
+
+== Beginner
+
+# setup
+#* tools
+#** browser
+#** text editor
+#* first page
+# architecture zero
+#* external files
+# variables
+# types
+#* primitives
+#** Number
+#** String
+#** Boolean
+#** undefined
+#** null
+#* composite
+#** Array
+#*** methods: filter, map, reduce, etc.
+#** JSON
+#** Function
+#*** arguments
+#** [Object]
+# functions
+#* declaration
+#* expression
+#* as methods
+#* as constructors
+# comments
+#* single-line
+#* block
+# scope
+#* global
+#* function
+#* name-spacing
+#* variable resolution
+# comparison operators
+#* equal
+#* greater/less than
+#* logical
+# control structures
+#* if/else
+#* while [do/while]
+#* for
+#* try/catch/finally
+#* switch
+# debugging
+
+== Intermediate
+
+# DOM
+#* document
+#* window
+#* event
+#* manipulation
+# IIFE
+#* closure
+#* information hiding
+# libraries
+#* jQuery
+# AJAX
+# execution context
+# events
+#* handlers
+#* listeners
+# progressive enhancement vs graceful degradation
+# prototypes
+#* augmenting objects
+#** polyfils
+# asynchronous programming
+#* callbacks
+#* CPS
+#* deferred
+# testing
+# lint/hint
+# regular expressions
+# patterns
+
+== Advanced
+
+# eval
+# with
+# Function
+# apply, bind, and call
+# critical thinking
+#* setInterval vs setTimeout
+#* object methods vs prototype methods
+# break the rules responsibly
+
+== links
+* [[http://www.w2lessons.com/2011/04/you-dont-know-javascript.html|You Don't Know Javascript]]
+* [[http://blog.stevenlevithan.com/archives/levels-of-javascript-regex-knowledge|Levels Of JS Regex Knowledge]]
