@@ -36,6 +36,16 @@
     top: -0.5em;
     width: 6em;
   }
+  h2 small {
+    cursor: pointer;
+    float: right;
+    font-size: .6em;
+    font-weight: normal;
+    opacity: .2;
+  }
+  h2 small:hover {
+    opacity: 1;
+  }
   html {
     background: gainsboro;
   }
@@ -102,9 +112,12 @@
                     .blur();
             });
 
+        $("h2")
+          .append(" <small>expand/collapse all</small>")
+
         $(document)
-          .on("click", "h2", function (event) {
-            $("+ ol", event.target)
+          .on("click", "h2 small", function (event) {
+            $("+ ol", event.target.parentNode)
               .children()
               .trigger("click");
           });
