@@ -8,6 +8,7 @@
 #** text editor
 #* first page
 # architecture zero
+#* arch one
 #* external files
 # variables
 # types
@@ -90,6 +91,7 @@
 # critical thinking
 #* setInterval vs setTimeout
 #* object methods vs prototype methods
+# functional javascript
 # break the rules responsibly
 
 == Links
