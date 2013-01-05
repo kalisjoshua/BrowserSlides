@@ -230,7 +230,7 @@ console.log(doubler(3)); // result is 6
 _
 === How?
 * Use of the IIFE structure
-** Localize “$” to reference jQuery object passed in
+** Localize reference to jQuery object passed in
 *** Small performance boost, not having to traverse scope
 ** Hide private variables and functions
 ---
